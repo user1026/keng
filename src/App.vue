@@ -1,30 +1,52 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+   <input type="text" v-model="x.id">
+   <input type="text" v-model="x.name">
+   <input type="text" v-model="x.age">
+   <ul>
+     <li v-for="item in user" :key="item.id">{{item.id}} {{item.name}} {{item.age}}</li>
+   </ul>
+    <button @click="change">123</button>
+    <router-link to="/one">one</router-link>
+    <router-link to="/two">two</router-link>
+    <div class="q">
+      <router-view></router-view>
+    </div>
+   
   </div>
-  <router-view/>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import {ref,reactive} from "vue"
+export default {
+ setup(){
+ let user=reactive([]);
+ let x=reactive({
+    id:'',
+   name:'',
+   age:''
+ })
+ let id=ref("");
+ let name=ref('');
+ let age=ref('');
+ function change(e){
+   e.preventDefault();
+    user.push({id:x.id,name:x.name,age:x.age})
+    //user.push({id:id.value,name:name.value,age:age.value})
+    console.log(user);
+ }
+return {user,x,id,name,age,change}
+ }
+ 
+};
+</script>
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+<style  scoped>
+.q{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  left:400px;
 }
 </style>
