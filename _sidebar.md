@@ -8,7 +8,7 @@
   - [js](/bug/JS)
 
 - [常用工具代码](/code/readme)
-  - [js](c/ode/js/utils)
+  - [js](/code/js/utils)
   - [go](/code/go/utils)
   - [css](/code/css/utils)
 
