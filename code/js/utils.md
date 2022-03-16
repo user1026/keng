@@ -60,7 +60,7 @@ function getTime(dateStr = "-", timeStr = ":", bool = 3) {
     }
 }
 ```
-#### 时间戳转正常时间
+#### 时间戳转正常日期时间
 
 ```javascript
 /**
