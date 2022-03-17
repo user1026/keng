@@ -103,5 +103,4 @@ function changeTime(TimeStr, dateStr = "-", timeStr = ":", bool = true) {
         return `${year}${dateStr}${month}${dateStr}${day} ${hour}${timeStr}${minutes}${timeStr}${seconds}`
     }
 }
->>>>>>> f4ed67097c833f38a6b65a6e0ee28b4228524950
 ```
