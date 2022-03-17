@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # JS
 ### 根据传的value返回key
 
@@ -8,7 +8,7 @@ function getValue(obj,v){
 }
 ```
 
-### 文件下载
+## 文件下载
 > 浏览器跳转
 ```javascript
 window.location.href="服务器下载地址"
@@ -17,11 +17,7 @@ window.location.href="服务器下载地址"
 > Blob方式
 ```javascript
 
-=======
-
-# JS
-
-
+```
 ## 时间
 #### 获取当前日期
 
