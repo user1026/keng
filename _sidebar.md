@@ -21,3 +21,5 @@
   - [GO](/remember/GO)
   - [js](/remember/JS)
   - [ts](/remember/TS)
+- [附录](/append/readme)
+  - [Blob的type](/append/blobtype) 
