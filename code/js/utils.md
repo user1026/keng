@@ -1,9 +1,25 @@
 
 # JS
+### 根据传的value返回key
 
+```javascript
+function getValue(obj,v){
+        return Object.keys(obj).find(val=>obj[val]==v)
+}
+```
 
+## 文件下载
+> 浏览器跳转
+```javascript
+window.location.href="服务器下载地址"
+```
+
+> Blob方式
+```javascript
+
+```
 ## 时间
-#### 获取当前日期
+> 获取当前日期
 
 ```javascript
 /**
@@ -18,7 +34,7 @@ function getTime(dateStr = "-") {
     return `${year}${dateStr}${month}${dateStr}${day}`
 }
 ```
-#### 获取当前时间 
+> 获取当前时间 
 
 ```javascript
 /**
@@ -34,7 +50,7 @@ function getTime(dateStr = "-", timeStr = ":", bool = 3) {
     return `${hour}${timeStr}${minutes}${timeStr}${seconds}`
 }
 ```
-#### 获取当前日期和时间 
+> 获取当前日期和时间 
 
 ```javascript
 /**
@@ -60,7 +76,7 @@ function getTime(dateStr = "-", timeStr = ":", bool = 3) {
     }
 }
 ```
-#### 时间戳转正常日期时间
+> 时间戳转正常日期时间
 
 ```javascript
 /**
