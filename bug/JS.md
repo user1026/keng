@@ -15,3 +15,15 @@ let s=new Set()
 ### 文件下载
 jQ的ajax不支持blob方式下载文件，它的xhr设置resopnseType设置为blob会报错
 需要用原生写ajax，并将responseType设置为blob
+
+### JQ append添加元素触发页面刷新
+
+```html
+<form>
+    <button>+<button>
+</form>
+```
+点击+号添加元素会触发表单提交事件导致页面刷新
+***将button标签修改为其他标签即可***
+
+
