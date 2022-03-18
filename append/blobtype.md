@@ -23,8 +23,7 @@
 | .ico          | Icon format                                    | image/vnd.microsoft.icon                                                                                                |
 | .ics          | iCalendar format                               | text/calendar                                                                                                           |
 | .jar          | Java Archive (JAR)                             | application/java-archive                                                                                                |
-| .jpeg         |
-| .jpg          | JPEG images                                    | image/jpeg                                                                                                              |
+| .jpg<br>.jpeg          | JPEG images                                    | image/jpeg                                                                                                              |
 | .js           | JavaScript                                     | text/javascript                                                                                                         |
 | .json         | JSON format                                    | application/json                                                                                                        |
 | .jsonld       | JSON-LD format                                 | application/ld+json                                                                                                     |

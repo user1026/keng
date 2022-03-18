@@ -14,6 +14,7 @@
   - [ts](/code/js/TsUtils)
   - [vue2](/code/js/vue2utils)
   - [vue3](/code/js/vue3utils)
+  - [axios](/code/js/axios)
 - [知识点](/remember/readme)
   - [vue2](/remember/VUE2)
   - [element](/remember/ELEMENT)
