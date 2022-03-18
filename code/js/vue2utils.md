@@ -1,6 +1,6 @@
 # Vue2
 
-### 常用代码片段
+### 结构
 ```javascript
 <template>
     <div></div>
@@ -27,5 +27,35 @@ export default{
 </script>
 <style lang="" scoped>
 </style>
+```
+### vuex
+```javascript
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+const store = new Vuex.Store({
+    state: {
+        count:0,
+    },
+    mutations: {
+        syncAdd(state,val){
+            state.count=val
+        }
+    },
+    actions:{
+        asynAdd(context,val){
+            context.commit("syncAdd",val)
+        }
+    },
+    getters: {
+        getCount(state){
+            return state.count
+        }
+    },
+    modules:{}
+})
+
+export default store
+
 ```
 
