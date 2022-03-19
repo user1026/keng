@@ -58,4 +58,25 @@ const store = new Vuex.Store({
 export default store
 
 ```
-
+### vueRouter
+```javascript
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import home from "./home"//示例
+Vue.use(VueRouter); //挂载属性
+const routes = [
+    {
+        path:"/home",
+        component: home
+    },
+    {
+        path: '*',//匹配不上以上地址走这 
+        redirect: '/home'//重定向地址 
+    }
+]
+const router =  new VueRouter({
+    mode: 'history',//路由模式分 hash和history
+    routes
+})
+export default router;
+```
