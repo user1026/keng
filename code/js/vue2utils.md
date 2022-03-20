@@ -67,7 +67,8 @@ Vue.use(VueRouter); //挂载属性
 const routes = [
     {
         path:"/home",
-        component: home
+        component: home,
+        beforeEnter:(to,from,next)=>{}//路由独享守卫
     },
     {
         path: '*',//匹配不上以上地址走这 
@@ -78,5 +79,14 @@ const router =  new VueRouter({
     mode: 'history',//路由模式分 hash和history
     routes
 })
+//全局守卫
+router.beforeEach((to,from,next)=>{
+    console.log(to);//要去的页面
+    console.log(from);//从哪个页面离开的
+    next(); //在路由守卫中，只有next()是放行，其他的诸如：next('/logon') 、 next(to) 或者 next({ ...to, replace: true })都不是放行，而是：中断当前导航，执行新的导航
+            //next() 是放行，但是如果next()里有参数的话，next()就像被重载一样，就有了不同的功能,例如：
+            //next(false)会中断路由，如果此时是从a去往b,就会中断当前路由，停在a页面
+            //next("/home"),如果此时是从a去往b,就会中断当前路由，前往home页面
+  })
 export default router;
 ```

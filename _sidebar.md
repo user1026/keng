@@ -24,3 +24,4 @@
   - [ts](/remember/TS)
 - [附录](/append/readme)
   - [Blob的type](/append/blobtype) 
+  - [vscode配置](/append/vscode)
