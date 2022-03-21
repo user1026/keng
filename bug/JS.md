@@ -27,7 +27,8 @@ jQ的ajax不支持blob方式下载文件，它的xhr设置resopnseType设置为b
 ***将button标签修改为其他标签即可***
 
 ### sort排序不传参
-sort不传参默认比较第一位的asscii码值，相同则比较第二位的asscii码值，之后以此类推
+
+sort不传参,默认比较第一位的asscii码值，相同则比较第二位的asscii码值，之后以此类推<br>
 sort函数在比较时会调用每个数组项的toString()转型方法，即会将每一项转化为ASCII进行比较。
 ```javascript
 var arr=[-7,0,-1,2,4,15,5];
