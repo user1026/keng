@@ -7,9 +7,14 @@
 
 父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount->子mounted->父mounted->父beforeDestroy->子beforeDestroy->子destroyed->父destroyed
 ### watch
->监听watch
+>监听普通类型
+```javascript
+watch:{
+  xxx(newVal,oldVal){}
+}
+```
 
-监听数组或对象的改变
+>监听数组或对象的改变
 ```javascript
     watch:{
         xxx:{
@@ -18,13 +23,35 @@
         }
     }
 ```
-监听对象某个值的改变
+>监听对象某个值的改变
 ```javascript
      watch:{
         "xxx.属性名"(newVal,oldVal){
            
         }
     }
+```
+>监听多个值的改变
+```javascript
+//只能有一个watch
+watch:{
+  a(newVal,oldVal){},
+  b(newVal,oldVal){}
+}
+```
+>多个监听执行同一个方法
+```javascript
+computed:{
+    change(){
+      const {a,b}=this;
+      return {a,b}
+    }
+},
+watch:{
+  change(newVal,oldVal){
+    console.log("a或者b变化了")
+  }
+}
 ```
 ### 路由
 #### 组件内守卫
