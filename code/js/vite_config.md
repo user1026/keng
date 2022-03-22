@@ -48,7 +48,7 @@ export default defineConfig({
 }
 })
 ```
-### vue2
+### vue2配置代理
 ```javascript
 devServer: {
     proxy: {
