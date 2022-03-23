@@ -25,3 +25,6 @@
 - [附录](/append/readme)
   - [Blob的type](/append/blobtype) 
   - [vscode配置](/append/vscode)
+  - [vscode](/append/vscode)
+  - [git&npm](/append/git%26npm)
+  - [markdown语法](/append/markdown)
