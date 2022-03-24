@@ -54,6 +54,9 @@ watch([() => book.name, count], ([name, count], [preName, preCount]) => {
 	console.log("count或book.name改变了");
 });
 ```
->2
+
+### 路由守卫
+
+#### 全局守卫
 ```javascript
 ```

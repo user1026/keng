@@ -53,7 +53,11 @@ watch:{
   }
 }
 ```
-### 路由
+### 路由守卫
+
+#### 全局守卫
+```javascript
+```
 #### 组件内守卫
 ```javascript
  beforeRouteEnter(to, from) {
