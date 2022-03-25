@@ -2,7 +2,7 @@
 
 ### open in brower 找不到chrome
 
-找到chrome.exe的地址（桌面快捷方式复制目标的地址，复制到chrome.exe即可），然后填入open in brower插件设置里<br>
+找到chrome.exe的地址（桌面快捷方式复制目标的地址，复制到chrome.exe即可），然后填入open in brower插件设置里或者在vscode里的setting.son里设置br>
 样例：<br>
 ***注意：需要转译***
 ```javascript
