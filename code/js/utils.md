@@ -166,3 +166,63 @@ function changeTime(TimeStr, dateStr = "-", timeStr = ":", bool = true) {
     }
 }
 ```
+
+## 原生ajax
+
+```javascript
+    function JSajax({
+    url,
+    data,
+    method,
+    async,
+    dataType,
+    success,
+    error
+}) {
+    if (!url) {
+        throw new Error("没有请求地址");
+    }
+    method = method || "get";
+    async = async ||true;
+    dataType = dataType || "json"
+    var xhr;
+    if (window.XMLHttpRequest) {
+        //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        xhr = new XMLHttpRequest();
+    } else {
+        throw new Error("XMLHttpRequest不存在")
+    }
+    xhr.responseType = dataType;
+    if (method == "get") {
+        if (data) {
+            url = url + "?"
+            for (var k in data) {
+                url += "&" + k + "=" + data[k];
+            }
+        }
+        xhr.open(method, url, async);
+        xhr.send();
+    } else {
+        xhr.open(method, url, async);
+        // 需要设置请求报文
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        if (data) {
+            xhr.send(data);
+        } else {
+            xhr.send();
+        }
+    }
+    xhr.onreadystatechange = function () {
+        // 在事件中 获取数据 并修改界面显示
+        if (xhr.readyState == 4) {
+            console.log(xhr);
+            if (xhr.status == 200) {
+                success && success(xhr.responseText);
+            } else {
+                error && error(xhr.responseText)
+            }
+
+        }
+    }
+}
+```
