@@ -1,6 +1,6 @@
 # Javascript
 
-## 数组方法
+## 数组常用方法
 >join(a) |有参数|a:用什么来连接字符串，例如"-"
 
 数组拼接成字符串,返回拼接后的字符串<br>
@@ -71,41 +71,207 @@ console.log(arr.slice(1,3))//[1,2]
 ```
 >splice(a,b,c)|有参数
 
-删除：splice(a,b)。a：要删除的起始索引,b:要删除的项数。
-插入：splice(a,b,c)。a：起始位置, b:要删除的项数,c:要插入的项。
-替换：可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需指定 3 个参数：起始位置、要删除的项数和要插入的任意数量的项。插入的项数不必与删除的项数相等。
-
-删除指定位置，并替换，返回删除的数据<br>
+***改变原数组***
+删除：splice(a,b)。a：要删除的起始索引,b:要删除的项数。返回删除的数据
+插入和替换：splice(a,b,c)。a：起始位置, b:要删除的项数,c:要插入的项。b=0时是直接插入。b不为0时时删除原有的项数再插入元素
 ```javascript
 let arr=[1,2,3,4]
-arr.splice()
-arr.splice()
-arr.splice()
-arr.splice()
+arr.splice(2,2)//[1,2]
+arr.splice(2,0,3)//[1,2,3]
+arr.splice(2，1，4)//[1,2,4]
+
 ```
->indexOf()和 lastIndexOf() （ES5新增）
+>indexOf(str)|有参|str:要查找的元素<br>lastIndexOf(str)|有参|str:要查找的元素<br>
+
+***不改变原数组***
+indexOf()查找元素第一次出现的位置并返回对应索引，没有返回-1<br>
+lastIndexOf()查找元素最后一次出现的位置并返回对应索引，没有返回-1<br>
+```javascript
+let arr=[0,1,2,3,4,1,5]
+console.log(arr.indexOf(1))//1
+console.log(arr.lastIndexOf(1))//5
+console.log(arr.indexOf(7))//-1
+```
+>forEach((v,i)=>{}) |有参|v:每项元素，i:索引
+
+遍历数组的每一项，无返回
+```javascript
+let arr=[1,2,3,4]
+arr.forEach((v,i)=>{
+    console.log(v,i)
+})
+/*1 0
+2 1
+3 2
+4 3*/
+```
+>map((v,i)=>{return}) |有参|v:每一项元素，i:索引
+
+对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
+```javascript
+var arr = [1, 2, 3, 4, 5];
+var arr2 = arr.map(function(item){
+return item*item;
+});
+console.log(arr2); 　　　　　　　　//[1, 4, 9, 16, 25]
+```
+>filter((v,i)=>{return})|有参|v:每一项元素，i:索引
+
+***不改变原数组***
+数组中的每一项运行给定函数，返回满足过滤条件组成的数组。
+```javascript
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var arr2 = arr.filter((v,i)=> {
+return  x >= 8;
+}); 
+console.log(arr2); 　　　　　　　　//[ 8, 9, 10]
+```
+>every() |有参
+
+判断数组中每一项都是否满足条件，只有所有项都满足条件，才会返回true。
+
+```javascript
+var arr = [1, 2, 3, 4, 5];
+var arr2 = arr.every(function(x) {
+return x < 10;
+}); 
+console.log(arr2); 　　　　　　　　//true
+```
+>some() |有参
+
+判断数组中是否存在满足条件的项，只要有一项满足条件，就会返回true。
+```javascript
+var arr = [1, 2, 3, 4, 5];
+var arr2 = arr.some(function(x) {
+return x < 3;
+}); 
+console.log(arr2); 　　　　　　　　//true
+```
+>find()|有参
+
+***不改变原数组***
+传入一个回调函数，找到数组中符合当前搜索规则的第一个元素，返回它，并且终止搜索
+```javascript
+const arr = [1, "2", 3, 3, "2"]
+console.log(arr.find(n => typeof n === "number")) // 1
+```
+>findIndex()|有参
+
+***不改变原数组***
+传入一个回调函数，找到数组中符合当前搜索规则的第一个元素，返回它的下标，终止搜索。
+```javascript
+const arr = [1, "2", 3, 3, "2"]
+console.log(arr.findIndex(n => typeof n === "number")) // 0
+```
+>fill(value, start, end)|有参|value:要替换的元素，start：起始下标，end：结束下标（start和end不传，会替换全部）[start,end)
+
+***改变原数组***
+用新元素替换掉数组内的元素，可以指定替换下标范围。
+```javascript
+let arr = [1, 2, 3, 4]
+arr.fill(9, 2, 7)
+console.log(arr)//[1,2,9,9]
+```
+>from(arr)|有参|arr:要转换的类数组
+
+***改变原数组***
+将类似数组的对象（array-like object）和可遍历（iterable）的对象转为真正的数组
 ```javascript
 ```
->forEach() （ES5新增）
+
+>includes(a)|有参|a:要查找的元素
+
+***不改变原数组***
+判断数组中是否存在该元素，参数：查找的值、起始位置，可以替换 ES5 时代的 indexOf 判断方式。indexOf 判断元素是否为 NaN，会判断错误。
 ```javascript
+var a = [1, 2, 3];
+a.includes(2); // true
+a.includes(4); // false
 ```
->map() （ES5新增）
-```javascript
-```
->filter() （ES5新增）
-```javascript
-```
->every() （ES5新增）
-```javascript
-```
->some() （ES5新增）
-```javascript
-```
+
 ## 字符串方法
 
-## 对象方法
+## 对象常用方法
 
-## Map方法
+>Object.entries(obj)|有参|obj:对象
+
+***不改变原对象***
+返回迭代器：返回键值对
+```javascript
+let obj={a:1,b；2}
+console.log(Object.entries(obj))//[["a",1],["b",2]]
+```
+>Object.keys(obj)|有参|obj:对象
+
+***不改变原对象***
+返回迭代器：返回键值对的key
+```javascript
+let obj={a:1,b；2}
+console.log(Object.keys(obj))//["a","b"]
+```
+>Object.values(obj)|有参|obj:对象
+
+***不改变原对象***
+返回迭代器：返回键值对的value
+```javascript
+let obj={a:1,b；2}
+console.log(Object.values(obj))//[1,2]
+```
+>Object.freeze(obj)|有参|obj：要冻结的对象
+
+***改变原对象***
+冻结一个对象，这意味着它不能再被更改。
+```javascript
+let obj={a:1}
+Object.freeze(obj)
+obj.a=2;
+console.log(obj.a)//1
+```
+## Map常用法
+
+>has(option)|有参|option:要查询的键
+
+如果映射包含指定元素，则返回 true。
+```javascript
+let map=new Map([["a",1],["b",2]])
+console.log(map.has("a"))//true
+console.log(map.has("c"))//false
+```
+
+>set(key,value)|有参|key:键名，value:键值
+
+添加一个新建元素到映射,返回添加后的map
+```javascript
+let map=new Map()
+map.set("a",1);
+console.log(map)//Map(1) { 'a' => 1 }
+```
+
+>get(key)|有参|key:键名
+
+返回映射中的指定元素。
+```javascript
+let map=new Map([["a",1],["b",2]])
+console.log(map.get("a"))//1
+```
+
+>delete(key)|有参|key:键名
+
+从映射中移除指定的元素,返回是否删除成功
+```javascript
+let map=new Map([["a",1],["b",2]])
+console.log(map.delete("a"))//true
+console.log(map)//Map(1) { 'b' => 2 }
+console.log(map.delete("c"))//false
+```
+>clear()|无参
+
+从映射中移除所有元素,没有返回
+```javascript
+let map=new Map([["a",1],["b",2]])
+map.clear()
+console.log(map)//Map(0) {}
+```
 ## "","0"，0，1，false,true,{},[],null,undefined
 
 >MDN文档给的关于==比较时的说明
