@@ -189,7 +189,9 @@ a.includes(2); // true
 a.includes(4); // false
 ```
 
-## 字符串方法
+## 字符串常用方法
+
+>slice(start,end)|有参|start:起始索引，end:结束索引（可选）<br>substr(start,length)|有参|start:起始索引，length:截取长度<br>substring(start,end)|有参|start:起始索引，end:结束索引<br>
 
 ## 对象常用方法
 
