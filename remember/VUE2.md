@@ -105,3 +105,39 @@ watch:{
 调用全局的 afterEach 钩子。<br>
 触发 DOM 更新。<br>
 调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。<br>
+
+### $router部分属性
+
+>$router是vue的router实例,可以理解为总管理
+
+1. $router.app ：配置了router的Vue根实例
+2. $router.mode：路由模式
+3. $router.currentRoute：当前路由的路由信息对象，包含了当前匹配路由的信息
+4. $router.addRoutes(routes)：动态添加路由规则，参数为符合routes选项要求的数组。
+5. $router.beforeEach((to,from,next)=>{}) ：全局前置守卫
+6. $router.beforeResolve()：全局解析守卫 , 在导航被确认之前，且在锁头组件内守卫和异步路由组件被解析之后调用，参数和全局前置守卫相同
+7. $router.afterEach((to,from)=>{})：全局后置守卫
+8. $router.go(n)：接受一个整数作为参数，类似window.history.go(n)，在浏览器历史记录中前进或后退几步
+9. $router.push( location )：跳转导航的方法，这种方法会向history栈添加一个新的记录
+10. $router.replace( location )：和router.push()类似，但是它会替换掉当前的history记录，不会添加新的记录
+11. $router.back()：相当于router.go(-1)
+12. $router.forward()：相当于router.go(1)
+13. $router.resolve(location)：解析目标路由，接受一个地址参数，返回location,route,href等属性信息，还可以接受当前默认路由current和当前路由上附加路径append　两个参数
+14. $router.onReady(callback,[errorCallback]){}：把一个回调排队，在路由完成初始导航时调用。
+15. $router.onError(callback)：注册一个回调，该回调会在路由导航过程中出错的时候被调用，但是对被调用的错误情形有要求：<br>
+    (1). 错误在一个路由守卫函数中被同步抛出<br>
+    (2). 错误在一个路由守卫函数中通过调用next(error)的方式异步捕获并处理<br>
+    (3). 渲染一个路由的过程中，需要尝试解析一个异步组件时发生错误<br>
+
+### $route部分属性
+
+>$route是当前激活的路由，它包含当前路由的各种信息，是只读的
+
+1. $route.fullPath ：完成解析后的url，包含查询参数和hash的完整路径
+2. $route.path：路径，字符串类型，解析为绝对路径
+3. $route.hash： 当前路由的hash值（带#号的），如果没有hash值则为空字符串
+4. $route.name：当前路由的名称，如果有的话（用于命名路由）
+5. $route.params：一个键值对对象，路由参数
+6. $route.query：一个键值对对象，表示url查询参数
+7. $route.matched：一个包含了当前路由的所有嵌套路径片段的路由记录（routes配置数组中的对象副本）
+8. $route.redirectedFrom：重定向来源的路由的名字，如果存在重定向的话。
