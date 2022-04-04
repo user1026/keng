@@ -274,6 +274,17 @@ let map=new Map([["a",1],["b",2]])
 map.clear()
 console.log(map)//Map(0) {}
 ```
+
+>forEach((v,k)=>{})|有参|v：每一项的键值，k：每一项的键名
+
+```javascript
+let map=new Map([["a",1],["b",2]])
+map.forEach((v,k)=>{
+    console.log(v,k)
+})
+//1 a
+//2 b
+```
 ## "","0"，0，1，false,true,{},[],null,undefined
 
 >MDN文档给的关于==比较时的说明

@@ -1,5 +1,6 @@
-# Element-UI 
+# Element-UI 和Element-plus
 
+## Element-UI
 ### tabs标签页结合router-view显示空白问题
 
 
@@ -28,3 +29,47 @@
 </el-tabs>
  <router-view />
 ```
+
+## Element-Plus
+
+
+### 标签写错导致报含有错位标签的相关文件找不到
+
+一下代码是在leftMenu组件中并导入index.vue
+```HTML
+ <el-menu
+        class="el-menu-vertical-demo"
+        :collapse="isCollapse"
+        @open="handleOpen"
+        @close="handleClose"
+    >
+        <el-sub-item index="/">
+            <template #title>
+                <div @click="addtabs('/home')">
+                    <el-icon>
+                        <home-filled />
+                    </el-icon>
+                    <span>首页</span>
+                </div>
+            </template>
+        </el-sub-item>
+    </el-menu>
+```
+原本正确的标签名叫`<el-menu-item></el-menu-item>`，而我写成了`<el-sub-item></el-sub-item>`，而报的错并不是标签错误而是这个leftMenu文件找不到
+```
+Failed to resolve import "element-plus/es/components/sub-item/style/css" from "src\view\baseHtml\home\leftMenu\index.vue". Does the file exist?
+V:/Vue3/src/view/baseHtml/home/leftMenu/index.vue:2:80
+1  |  /* unplugin-vue-components disabled */import { ElMenu as __unplugin_components_2 } from 'element-plus/es';import 'element-plus/es/components/menu/style/css';
+2  |  import { ElSubItem as __unplugin_components_1 } from 'element-plus/es';import 'element-plus/es/components/sub-item/style/css';
+   |                                                                                 ^
+3  |  import { ElIcon as __unplugin_components_0 } from 'element-plus/es';import 'element-plus/es/components/icon/style/css';
+4  |  import { ref, reactive, onMounted } from 'vue'
+    at formatError (V:\Vue3\node_modules\vite\dist\node\chunks\dep-3daf770c.js:42587:46)
+    at TransformContext.error (V:\Vue3\node_modules\vite\dist\node\chunks\dep-3daf770c.js:42583:19)
+    at normalizeUrl (V:\Vue3\node_modules\vite\dist\node\chunks\dep-3daf770c.js:80909:26)
+    at async TransformContext.transform (V:\Vue3\node_modules\vite\dist\node\chunks\dep-3daf770c.js:81049:57)
+    at async Object.transform (V:\Vue3\node_modules\vite\dist\node\chunks\dep-3daf770c.js:42803:30)
+    at async doTransform (V:\Vue3\node_modules\vite\dist\node\chunks\dep-3daf770c.js:57478:29
+```
+
+改成正确的标签名字后这个问题消失
