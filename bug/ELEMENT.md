@@ -33,7 +33,7 @@
 ## Element-Plus
 
 
-### 标签写错导致报含有错位标签的相关文件找不到
+### 标签写错导致报含有错误标签的相关文件找不到
 
 一下代码是在leftMenu组件中并导入index.vue
 ```HTML
@@ -73,3 +73,14 @@ V:/Vue3/src/view/baseHtml/home/leftMenu/index.vue:2:80
 ```
 
 改成正确的标签名字后这个问题消失
+
+
+### 图标不显示
+
+需要下载`@element-plus/icons-vue`，然后使用时导入需要使用的图标，例如：
+```javascript
+import {
+    Expand,
+    HomeFilled
+} from "@element-plus/icons-vue"//注意开头字母全部大写，中间有连接线的，连接线后的第一个字母大写
+```

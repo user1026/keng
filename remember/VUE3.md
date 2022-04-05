@@ -30,19 +30,19 @@ watch(count, (newValue, oldValue) => { //直接监听
 let book = reactive({
      name: "a",
  });
- watch(()=>book.name,()=>{//通过一个函数返回要监听的属性
+ watch(()=>book.name,(newVal,oldVal)=>{//通过一个函数返回要监听的属性
  	console.log('书名改变了')
  })
 ```
 >监听多个值的改变
 ```javascript
 //可以有多个watch
-watch(count, () => {
+watch(count, (newVal,oldVal) => {
 	console.log("count改变了");
 });
 watch(
     () => book.name,
-    () => {
+    (newVal,oldVal) => {
         console.log("书名改变了");
     }
 );
