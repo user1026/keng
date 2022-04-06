@@ -40,6 +40,11 @@ arr.sort();//[-1,-7,0,15,2,4,5]
 
 如果进入页面不进行点击等操作，直接关闭，会出现不触发离开确认弹框的情况。总结来说就是 onbeforeunload 方法需要用户和页面有交互动作才能在关闭页面时才能触发离开确认弹框，否则不生效。
 
+### An invalid form control with name='XXX' is not focusable.
+
+发现是有个input自己由于业务需要控制它显示与隐藏
+但是自己又要求它是required 然后就报这个错
+
 
 
 
