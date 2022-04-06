@@ -60,3 +60,21 @@ watch([() => book.name, count], ([name, count], [preName, preCount]) => {
 #### 全局守卫
 ```javascript
 ```
+
+### 父子组件调用
+
+> 父传子
+
+> 父组件调用子组件方法
+
+> 子传父
+
+子组件
+```javascript
+
+```
+父组件
+```javascript
+```
+
+> 子组件调用父组件方法
