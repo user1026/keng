@@ -18,3 +18,35 @@ Catch all routes ("*") must now be defined using a param with a custom regexp.
        }
    ]
 ```
+
+### Pinia报错：getActivePinia was called with no active Pinia. Did you forget to install pinia? const pinia = createPinia()
+
+```javascript
+//错误代码
+import router from "@/router/index.js"
+import {
+    rightTabName
+} from "@/store/index.js"
+const tabName = rightTabName();//这行代码的位置是错的
+router.beforeEach((to, from) => {
+   
+    tabName.setRouterName(to.meta.title)
+})
+
+export default router
+```
+在全局store还没有挂载到app上的时候，就调用了，这样导致了pinia实例还没挂载。
+```javascript
+import router from "@/router/index.js"
+import {
+    rightTabName
+} from "@/store/index.js"
+
+
+router.beforeEach((to, from) => {
+    const tabName = rightTabName();//放到里面，路由挂载完后在调用就没问题了
+    tabName.setRouterName(to.meta.title)
+})
+
+export default router
+```
