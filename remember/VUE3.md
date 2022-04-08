@@ -65,16 +65,73 @@ watch([() => book.name, count], ([name, count], [preName, preCount]) => {
 
 > 父传子
 
+父组件
+```javascript
+```
+子组件
+```javascript
+```
 > 父组件调用子组件方法
+
+子组件
+```javascript
+import {
+        ref,
+        reactive,
+        onMounted,
+        defineExpose
+    } from 'vue'
+  const addtabs = (path) => {
+        console.log(path)
+    }
+    //defineExpose将父组件需要调用的属性或者方法暴露出去，不暴露无法调用
+    defineExpose({
+        addtabs,
+    })
+```
+父组件
+```javascript
+<script setup>
+import {
+        ref,
+        reactive,
+        onMounted,
+        defineExpose
+    } from 'vue'
+const right=ref(null)
+const addtabs = (path) => {
+        right.value.addtabs(path)
+    }
+</script>
+<template>
+ <rightmain ref="right"></rightmain>
+</template>
+```
 
 > 子传父
 
 子组件
 ```javascript
-
+import {
+        ref,
+        reactive,
+        onMounted,
+        defineProps,
+        defineEmits,
+    } from 'vue'
+    const emit = defineEmits(["chaddtabs","b"])
+    const handClick=(option)=>{
+        emit("chaddtabs",option)
+    }
 ```
 父组件
 ```javascript
+<script setup>
+const addtabs = (option) => {}
+</script>
+<tempalte>
+ <leftmenu ref="left" @chaddtabs="addtabs"></leftmenu>
+</tempalte>
 ```
 
 > 子组件调用父组件方法

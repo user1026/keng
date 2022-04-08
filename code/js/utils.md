@@ -215,7 +215,7 @@ function changeTime(TimeStr, dateStr = "-", timeStr = ":", bool = true) {
     xhr.onreadystatechange = function () {
         // 在事件中 获取数据 并修改界面显示
         if (xhr.readyState == 4) {
-            console.log(xhr);
+          
             if (xhr.status == 200) {
                 success && success(xhr.responseText);
             } else {
