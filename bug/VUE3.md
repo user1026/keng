@@ -50,3 +50,36 @@ router.beforeEach((to, from) => {
 
 export default router
 ```
+
+### pinia缓存问题
+
+在全局前置守卫中通过pinia设置title的值但是在页面中获取的却是上一次的值<br>
+
+```javascript
+//路由中
+router.beforeEach(async (to, from) => {
+    const tabName = rightTabName();
+    tabName.setRouterName(to.meta.title)
+
+    console.log("pinia在前置路由中title值:" + tabName.getRouterName())
+})
+```
+
+```javascript
+//组件中
+ let title = tabname.getRouterName();
+console.log("在组件中pinia的title值：" + tabname.getRouterName())
+ console.log("title：" + title, "path：" + path)
+```
+
+```
+//输出
+在组件中pinia的title值：undefined
+title：undefined path：/one
+pinia在前置路由中title值:one
+
+
+index.vue:28 在组件中pinia的title值：one
+title：one path：/two
+ pinia在前置路由中title值:two
+```
