@@ -88,7 +88,7 @@ window.location.href="服务器下载地址"
  * @param {string} dateStr 日期连接符
  * @returns {string}
  */
-function getTime(dateStr = "-") {
+export const getTime=(dateStr = "-")=> {
     let time = new Date();
     let year = time.getFullYear();
     let month = time.getMonth() + 1 < 10 ? "0" + (time.getMonth() + 1) : (time.getMonth() + 1);
@@ -104,7 +104,7 @@ function getTime(dateStr = "-") {
  * @param {number} bool 是否返回日期/时间/日期+时间
  * @returns {string}
  */
-function getTime(dateStr = "-", timeStr = ":", bool = 3) {
+export const getTime=(dateStr = "-", timeStr = ":", bool = 3)=> {
     let time = new Date();
     let hour = time.getHours() < 10 ? "0" + time.getHours() : time.getHours();
     let minutes = time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
@@ -121,7 +121,7 @@ function getTime(dateStr = "-", timeStr = ":", bool = 3) {
  * @param {number} bool 是否返回日期/时间/日期+时间
  * @returns {string}
  */
-function getTime(dateStr = "-", timeStr = ":", bool = 3) {
+export const getTime=(dateStr = "-", timeStr = ":", bool = 3)=> {
     let time = new Date();
     let year = time.getFullYear();
     let month = time.getMonth() + 1 < 10 ? "0" + (time.getMonth() + 1) : (time.getMonth() + 1);
@@ -149,7 +149,7 @@ function getTime(dateStr = "-", timeStr = ":", bool = 3) {
  * @param {number} bool 是否返回日期/时间/日期+时间
  * @returns {string}
  */
-function changeTime(TimeStr, dateStr = "-", timeStr = ":", bool = true) {
+export const changeTime=(TimeStr, dateStr = "-", timeStr = ":", bool = true)=> {
     let time = new Date(Number(TimeStr));
     let year = time.getFullYear();
     let month = time.getMonth() + 1 < 10 ? "0" + (time.getMonth() + 1) : (time.getMonth() + 1);
@@ -224,5 +224,45 @@ function changeTime(TimeStr, dateStr = "-", timeStr = ":", bool = true) {
 
         }
     }
+}
+```
+
+## 判断浏览器
+```javascript
+function getInternetType(){    
+    if(navigator.userAgent.indexOf("MSIE")>0) {    
+      return "MSIE";       //IE浏览器  
+    }  
+    if(navigator.userAgent.indexOf("Chrome/")>0){    
+      return "Chrome";    //Chrome浏览器  
+    }   
+    if(navigator.userAgent.indexOf("Firefox")>0){    
+      return "Firefox";     //Firefox浏览器  
+    }  
+ 
+    if(navigator.userAgent.indexOf("Safari")>0) {    
+      return "Safari";      //Safan浏览器  
+    }  
+ 
+    if(navigator.userAgent.indexOf("Camino")>0){    
+      return "Camino";   //Camino浏览器  
+    }  
+    if(navigator.userAgent.indexOf("Gecko/")>0){    
+      return "Gecko";    //Gecko浏览器  
+    }    
+} 
+```
+
+## 正则
+
+>手机号
+
+```javascript
+/**
+ * @params {number|string} s 手机号
+ * return {Boolean}
+ */
+export const isMobile=(s)=>{
+    return /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(s)
 }
 ```
