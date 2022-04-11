@@ -83,3 +83,20 @@ index.vue:28 在组件中pinia的title值：one
 title：one path：/two
  pinia在前置路由中title值:two
 ```
+### 数组filter
+
+使用reactive声明的数组在使用filter时有点不方便，改成ref声明的就行
+
+```javascript
+let list=reactive([1,2,3,4]);
+let arr=list;
+list=arr.filter(val=>val>2);
+//此时页面显示的还是原来的数组
+```
+
+```javascript
+let list=ref([1,2,3,4]);
+let arr=list.value;
+list.value=arr.filter(val=>val>2);
+//此时页面显示正常
+```
