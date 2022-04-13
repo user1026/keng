@@ -28,4 +28,4 @@
   - [vscode配置](/append/vscode)
   - [git&npm](/append/git%26npm)
   - [markdown语法](/append/markdown)
-  - [http状态码](/append/httpCode)
+  - [http](/append/http)

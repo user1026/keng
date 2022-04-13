@@ -47,3 +47,24 @@
 | 503    | Service Unavailable             | 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中                                                              |
 | 504    | Gateway Time-out                | 充当网关或代理的服务器，未及时从远端服务器获取请求                                                                                                               |
 | 505    | HTTP Version not supported      | 服务器不支持请求的HTTP协议的版本，无法完成处理                                                                                                                   |
+
+### 常见的Content-type类型
+
+Content-type是Http的实体首部字段，在request的请求行（或response的状态码）之后，也是首部的一部分。用于说明请求或返回的消息主体是用何种方式编码.<br>
+MediaType，即是Internet Media Type，互联网媒体类型；也叫做MIME类型，在Http协议消息头中，使用Content-Type来表示具体请求中的媒体类型信息。<br>
+类型格式：type/subtype(;parameter)? type<br>
+主类型，任意的字符串，如text，如果是号代表所有；<br>
+subtype 子类型，任意的字符串，如html，如果是号代表所有；<br>
+parameter 可选，一些参数，如Accept请求头的q参数， Content-Type的 charset参数。<br>
+|类型|描述|
+|---|----|
+|application/x-www-form-urlencoded|浏览器的原生form表单<br> 提交的数据按照 key1=val1&key2=val2 的方式进行编码，key和val都进行了URL转码|
+|multipart/form-data|常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 form 的 enctype 等于这个值。|
+|application/json|消息主体是序列化后的 JSON 字符串,这个类型越来越多地被大家所使用|
+|text/xml|是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范|
+|application/octet-stream|二进制流数据（如常见的文件下载）|
+|image/jpeg|jpg图片格式 |
+|image/png|png图片格式|
+|text/plain|纯文本格式  |
+|image/gif|gif图片格式 |
+|application/pdf   |pdf格式 |
