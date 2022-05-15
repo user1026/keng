@@ -32,3 +32,5 @@
   - [git&npm](/append/git%26npm)
   - [markdown语法](/append/markdown)
   - [http](/append/http)
+  - [go安装](/append/go)
+  - [linux常用命令](/append/linux)

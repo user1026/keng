@@ -56,15 +56,17 @@ MediaType，即是Internet Media Type，互联网媒体类型；也叫做MIME类
 主类型，任意的字符串，如text，如果是号代表所有；<br>
 subtype 子类型，任意的字符串，如html，如果是号代表所有；<br>
 parameter 可选，一些参数，如Accept请求头的q参数， Content-Type的 charset参数。<br>
-|类型|描述|
-|---|----|
-|application/x-www-form-urlencoded|浏览器的原生form表单<br> 提交的数据按照 key1=val1&key2=val2 的方式进行编码，key和val都进行了URL转码|
-|multipart/form-data|常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 form 的 enctype 等于这个值。|
-|application/json|消息主体是序列化后的 JSON 字符串,这个类型越来越多地被大家所使用|
-|text/xml|是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范|
-|application/octet-stream|二进制流数据（如常见的文件下载）|
-|image/jpeg|jpg图片格式 |
-|image/png|png图片格式|
-|text/plain|纯文本格式  |
-|image/gif|gif图片格式 |
-|application/pdf   |pdf格式 |
+
+
+| 类型                              | 描述                                                                                                |
+| --------------------------------- | --------------------------------------------------------------------------------------------------- |
+| application/x-www-form-urlencoded | 浏览器的原生form表单<br> 提交的数据按照 key1=val1&key2=val2 的方式进行编码，key和val都进行了URL转码 |
+| multipart/form-data               | 常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 form 的 enctype 等于这个值。             |
+| application/json                  | 消息主体是序列化后的 JSON 字符串,这个类型越来越多地被大家所使用                                     |
+| text/xml                          | 是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范                                        |
+| application/octet-stream          | 二进制流数据（如常见的文件下载）                                                                    |
+| image/jpeg                        | jpg图片格式                                                                                         |
+| image/png                         | png图片格式                                                                                         |
+| text/plain                        | 纯文本格式                                                                                          |
+| image/gif                         | gif图片格式                                                                                         |
+| application/pdf                   | pdf格式                                                                                             |
