@@ -1,6 +1,6 @@
 # GO安装
 
-## 安装过程可参考https://www.topgoer.com/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/go%E7%9A%84%E5%AE%89%E8%A3%85.html这个网址
+## 安装过程可参考https://www.topgoer.com/开发环境/go的安装.html
 
 ### 注意的几个问题
 
