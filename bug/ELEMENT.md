@@ -16,8 +16,12 @@
   </el-tab-pane>
 </el-tabs>
 ```
-以上代码在运行时，当点击左边菜单栏时，右边tabs会添加一个激活的tab，但是这个tab一片空白不会显示任何东西，具体原因未知，正确的写法是将<router-view />写在外面，如下所示：
+
+以上代码在运行时，当点击左边菜单栏时，右边tabs会添加一个激活的tab，但是这个tab一片空白不会显示任何东西，具体原因未知。<br>
+
+<font color="blue">正确的写法是将`<router-view />`写在外面，如下所示：</font>
 ```HTML
+
 <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
   <el-tab-pane
     v-for="(item, index) in editableTabs"
@@ -37,12 +41,14 @@
 
 一下代码是在leftMenu组件中并导入index.vue
 ```HTML
+
  <el-menu
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
         @open="handleOpen"
         @close="handleClose"
     >
+    <!-----此处有误------->
         <el-sub-item index="/">
             <template #title>
                 <div @click="addtabs('/home')">
@@ -77,7 +83,7 @@ V:/Vue3/src/view/baseHtml/home/leftMenu/index.vue:2:80
 
 ### 图标不显示
 
-需要下载`@element-plus/icons-vue`，然后使用时导入需要使用的图标，例如：
+<font color="blue">需要下载`@element-plus/icons-vue`，然后使用时导入需要使用的图标，例如：</font>
 ```javascript
 import {
     Expand,
