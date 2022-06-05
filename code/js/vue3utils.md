@@ -69,3 +69,31 @@ import { createPinia } from 'pinia';
 app.use(createPinia());
 
 ```
+
+### vue-router
+
+```javascript
+import {
+    createRouter,
+    createWebHashHistory
+} from 'vue-router';
+const routes = [{
+        path: "/login",
+        component: login,
+        meta: {
+            title: "登陆页"
+        }
+    }
+]
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes
+})
+export default router
+
+```
+在mian.js中加入以下代码
+```javascript
+import router from "./router/index";
+app.use(router);
+```

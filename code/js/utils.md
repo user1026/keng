@@ -101,10 +101,9 @@ export const getTime=(dateStr = "-")=> {
 ```javascript
 /**
  * @param {string} timeStr 时间连接符
- * @param {number} bool 是否返回日期/时间/日期+时间
  * @returns {string}
  */
-export const getTime=(dateStr = "-", timeStr = ":", bool = 3)=> {
+export const getTime=( timeStr = ":")=> {
     let time = new Date();
     let hour = time.getHours() < 10 ? "0" + time.getHours() : time.getHours();
     let minutes = time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();

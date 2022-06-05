@@ -22,7 +22,7 @@ http.interceptors.reponse.use(res=>{
 
 >完整代码
 ```javascript
-import axios from "axios
+import axios from "axios"
 let http = axios.create({
     baseURL: 'url',
     timeout: 15000  //超时时间 （ 毫秒）
