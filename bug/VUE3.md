@@ -69,3 +69,12 @@ let arr=list.value;
 list.value=arr.filter(val=>val>2);
 //此时页面显示正常
 ```
+
+### 插槽中不能在使用插槽
+
+```javascript
+<template #default>
+    <template #main></template>
+</template>
+
+```

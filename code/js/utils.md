@@ -81,6 +81,13 @@ window.location.href="服务器下载地址"
         }
 ```
 ## 时间
+>获取前/后几天的日期
+
+```javascript
+let beforeTime=new Date(new Date().getTime()-24*36000*1000)
+let afterTime=new Date(new Date().getTime()+24*36000*1000)
+```
+
 > 获取当前日期
 
 ```javascript
