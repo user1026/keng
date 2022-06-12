@@ -57,6 +57,8 @@ watch:{
 
 #### 全局守卫
 ```javascript
+beforeEach((to,form,next)=>{})//前置守卫
+afterEach((to,form)=>{})//后置守卫
 ```
 #### 组件内守卫
 ```javascript

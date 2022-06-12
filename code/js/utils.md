@@ -84,8 +84,8 @@ window.location.href="服务器下载地址"
 >获取前/后几天的日期
 
 ```javascript
-let beforeTime=new Date(new Date().getTime()-24*36000*1000)
-let afterTime=new Date(new Date().getTime()+24*36000*1000)
+let beforeTime=new Date(new Date().getTime()-24*36000*1000*day)
+let afterTime=new Date(new Date().getTime()+24*36000*1000*day)
 ```
 
 > 获取当前日期
@@ -260,6 +260,9 @@ function getInternetType(){
 ```
 
 ## 正则
+
+常用正则以及正则测试推荐浏览器插件FeHelper
+
 
 >手机号
 
