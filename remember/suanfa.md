@@ -71,7 +71,6 @@ return arr
 
 ```javascript
 function binarySearch(arr, target){
-
     let start = 0;
     let end = arr.length - 1;
     if(!end) return -1

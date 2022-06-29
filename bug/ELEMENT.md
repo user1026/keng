@@ -61,7 +61,7 @@
         </el-sub-item>
     </el-menu>
 ```
-原本正确的标签名叫`<el-menu-item></el-menu-item>`，而我写成了`<el-sub-item></el-sub-item>`，而报的错并不是标签错误而是这个leftMenu文件找不到
+原本正确的标签名叫`<el-menu-item></el-menu-item>`，而我写成了`<el-sub-item></el-sub-item>`，但是报的错并不是标签错误而是这个leftMenu文件找不到
 ```
 Failed to resolve import "element-plus/es/components/sub-item/style/css" from "src\view\baseHtml\home\leftMenu\index.vue". Does the file exist?
 V:/Vue3/src/view/baseHtml/home/leftMenu/index.vue:2:80
