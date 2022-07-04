@@ -23,8 +23,8 @@ jQ的ajax不支持blob方式下载文件，它的xhr设置resopnseType设置为b
     <button>+<button>
 </form>
 ```
-点击+号添加元素会触发表单提交事件导致页面刷新
-<font color="blue">将button标签修改为其他标签即可</font>
+form表单中的button默认的type为submit,会触发表单提交事件导致页面刷新
+<font color="blue">将button标签修改为其他标签或者修改button的type属性为button即可</font>
 
 ### sort排序不传参
 
@@ -44,6 +44,17 @@ arr.sort();//[-1,-7,0,15,2,4,5]
 
 发现是有个input自己由于业务需要控制它显示与隐藏
 但是自己又要求它是required 然后就报这个错
+
+### ajax上传文件报错
+
+```html
+<input type="file"/>
+<button>提交</button>
+```
+错误触发操作：<>
+当input选中文件后不点提交而是打开文件修改内容，然后再点提交会导致报错，原因是因为本地文件状态改变
+
+<font color="blue">***选中时转为base64，提交时转为file***</font>
 
 
 

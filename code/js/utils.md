@@ -258,7 +258,79 @@ function getInternetType(){
     }    
 } 
 ```
+## file，base64，Blob
 
+>file或blob转base64
+
+```js
+export const FileToBase64=(file,base64url)=>{
+    let reader=new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload=(e)=>{
+         let base64=e.target.result;
+        base64url(base64)
+    }
+}
+//调用
+FileToBase64(file,(base64url)=>{
+    base64=base64url
+})
+```
+```js
+export const FileToBase64=(file)=>{
+    let reader=new FileReader();
+    reader.readAsDataURL(file);
+    return new Promise((resolve, reject) => {
+        reader.onload=(e)=>{
+            let base64=e.target.result;
+            resolve(base64)
+        }
+        reader.onerror=(e)=>{
+            reject(e)
+        }
+    })
+}
+//调用
+FileToBase64(file).then((base64)=>{console.log("base64:",base64)})
+```
+>base64转file
+
+```js
+export const Base64ToFile=(base64,fileName)=>{
+    let arr=base64.split(","),
+     mime=arr[0].match(/:(.*?);/)[1],
+     fileType=mime.split("/")[1],
+     bstr=window.atob(arr[1]),
+     n=bstr.length,
+     uBarr=new Uint8Array(n);
+    while(n--){
+        uBarr[n]=bstr.charCodeAt(n)
+    }
+    return new File([uBarr],`${fileName}.${fileType}`,{type:mime})
+}
+```
+>base64转Blob
+
+```js
+export const  Base64ToBlob=(dataurl, filename)=> {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+}
+```
+>Blob转file
+
+```js
+export const BlobToFile=(blob,fileName,fileType)=> {
+    return new File([blob], fileName, { type: fileType })
+}
+```
 ## 正则
 
 常用正则以及正则测试推荐浏览器插件FeHelper
