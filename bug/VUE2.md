@@ -9,3 +9,13 @@
 此时就要使用next({ ...to, replace: true }) 来确保 addRoutes() 时动态添加的路由已经被完全加载上去。<br>
 
  next({ ...to, replace: true }) 中的 replace: true 只是一个设置信息，告诉VUE本次操作后，不能通过浏览器后退按钮，返回前一个路由。
+
+ >template上使用v-for报错
+
+ 
+在template标签上使用v-for报错
+
+cannot be keyed. Place the key on real elements instead
+
+查了一下百度，是因为key需要绑定在真实的元素上
+

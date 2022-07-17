@@ -19,11 +19,12 @@ git remote add origin 你的远程仓库地址
 
 ```
 // 不会切换当前分支；
-git branch new_branch origin/remote_branch
+git branch newBranchName origin/remoteBranchName
+
 
 
 // 如果想要创建分支的同时，切换到新分支
-git checkout -b new_branch origin/remote_branch
+git checkout -b newBranchName origin/remoteBranchName
 ```
 
 

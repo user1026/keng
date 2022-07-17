@@ -84,3 +84,7 @@ const [number,setnumber]=useState(0)
                 </Routes>
 </C.Provider>
 ```
+
+## react 组件私有样式：styled-component
+
+## react全局状态管理器：mobx
