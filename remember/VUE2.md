@@ -1,6 +1,80 @@
 # VUE2
 ## HTML,CSS
 >动态绑定class
+写在指令中的值会被视作表达式，如javascript表达式，因此v-bind:class接受三目运算：<br>
+HTML代码：
+```HTML
+<div :class="classA ? 'class-a' : 'class-b' ">Demo3</div>
+```
+
+渲染后的HTML:
+```HTML
+<div class="class-a">Demo3</div>
+```
+v-bind:class 支持对象，对象改变时会动态更新class
+
+
+HTML代码：
+```HTML
+<div :class="{ 'class-a': isA, 'class-b': isB}">Demo4</div>
+```
+
+Javascript代码：
+```JS
+data: {
+ isA: false, //当isA改变时，将更新class
+ isB: true //当isB改变时，将更新class
+}
+```
+
+渲染后的HTML:
+```HTML
+<div class="class-b">Demo4</div>
+```
+v-bind:class支持数组, 数组里的变量改变时，会动态更新class列表<br>
+
+HTML代码：
+```HTML
+<div :class="[classA, classB]">Demo6</div>
+```
+
+Javascript代码：
+```JS
+data: {
+ classA: 'class-a',
+ classB: 'class-b'
+}
+```
+
+渲染后的HTML:
+```HTML
+<div class="class-a class-b">Demo6</div>
+```
+数组中可以包含object类型，数组中的object对象改变，也会更新class列表<br>
+HTML代码：
+```HTML
+<div :class="[classA, classB]">Demo7</div>
+```
+
+Javascript代码：
+```JS
+data: {
+ classA: 'class-a',
+ objectClass: {
+ classB: 'class-b', // classB 的值为class-b, 则将classB的值添加到class列表
+ classC: false, // classC值为false,将不添加classC
+ classD: true // classD 值为true，classC将被直接添加到class列表
+}
+}
+```
+
+渲染后的HTML:
+```HTML
+<div class="class-a class-b classD">Demo7</div>
+```
+
+
+
 ## JS
 ### 生命周期
 > 父子组件生命周期执行顺序
