@@ -31,7 +31,7 @@ React 16.8+的生命周期分为三个阶段，分别是挂载阶段、更新阶
 
 - componentWillUnmount: 当组件被卸载或者销毁了就会调用，我们可以在这个函数里去清除一些定时器，取消网络请求，清理无效的DOM元素等垃圾清理工作。
 
-## 配置
+## 配置 (webpack版)
 >react 关闭eslint 配置
 
 在 package.json 中修改为一下 
@@ -46,6 +46,19 @@ React 16.8+的生命周期分为三个阶段，分别是挂载阶段、更新阶
     }
 ```
 修改完后重启
+
+>react vite开启装饰器
+
+```JavaScript
+plugins: [react({
+    babel: {
+      plugins: [
+        ["@babel/plugin-proposal-decorators", { legacy: true }],
+        ["@babel/plugin-proposal-class-properties", { loose: true }],
+      ],
+    },
+  })],
+```
 
 ## react-router-dom
 
@@ -84,7 +97,11 @@ const [number,setnumber]=useState(0)
                 </Routes>
 </C.Provider>
 ```
+>mobx mobx-react
 
+```JavaScript
+```
 ## react 组件私有样式：styled-component
+
 
 ## react全局状态管理器：mobx
