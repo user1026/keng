@@ -25,7 +25,6 @@ go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/
 
 |函数|参数说明|函数说明|举例|
 |-----------|--------|-------------|---------------|
-
 |OpenFile(filename)|filename:文件路径|打开指定文件|f, err := excelize.OpenFile("../1.xlsx")|
 |Close()|无参|关闭文件|f.Close()|
 |GetCellValue(sheetname,position)|sheetname:工作表名，position:单元格位置|获取工作表中指定单元格的值|res, _ := f.GetCellValue("a", "A2")|
@@ -34,4 +33,3 @@ go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/
 |SaveAs(filename)|filename:文件路径|另存为|err := f.SaveAs("../1.xlsx")|
 |NewSheet(sheetname)|sheetname:工作表名|在当前打开文件里新建工作表|index:=f.NewSheet("b")|
 |DeleteSheet(sheetname)|sheetname:工作表名|删除指定工作表|err:=f.DeleteSheet("b")|
-|||||
