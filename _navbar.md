@@ -1,8 +1,41 @@
--   [踩过的坑]
-    -   [踩过的坑](/bug/vue2.md)
--   [工具代码]
-    -   [工具代码](/code/js.md)
--   [知识点]
-    -   [知识点](/remember/react.md)
--   [附录]
-    -   [附录](/append/http.md)
+* 踩过的坑
+  * [vue2](/bug/vue2.md)
+  * [vue3](/bug/vue3.md)
+  * [react](/bug/react.md)
+  * [element](/bug/element.md)
+  * [GO](/bug/GO.md)
+  * [JS](/bug/JS.md)
+  * [TS](/bug/TS.md)
+* 工具代码
+  * [css](/code/css/utils.md)
+  * [go](/code/go/utils.md)
+  * [Axios](/code/js/axios.md)
+  * [react](/code/js/react.md)
+  * [vue2](/code/js/vue2utils.md)
+  * [vue3](/code/js/vue3utils.md)
+  * [js](/code/js/utils.md)
+  * [vite](/code/js/vite_config.md)
+* 知识点
+  * [react](/remember/react.md)
+  * [vue2](/remember/VUE2.md)
+  * [vue3](/remember/VUE3.md)
+  * [GO](/remember/GO.md)
+  * [element](/remember/ELEMENT.md)
+  * [uniapp](/remember/uniapp.md)
+  * [算法](/remember/suanfa.md)
+  * [musql](/remember/mysql.md)
+  * [设计模式](/remember/sheji.md)
+  * [redis](/remember/redis.md)
+  * [TS](/remember/TS.md)
+  * [JS](/remember/JS.md)
+  * [计算机网络](/remember/internet.md)
+* 附录
+  * [ajax的Type](/append/blobtype.md)
+  * [git&npm](/append/git&npm.md)
+  * [http](/append/http.md)
+  * [linux](/append/linux.md)
+  * [服务器](/append/serve.md)
+  * [vscode](/append/vscode.md)
+  * [markdown](/append/markdown.md)
+  * [go教程](/append/go.md)
+  

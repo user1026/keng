@@ -8,6 +8,7 @@
   - [js](/bug/JS)
   - [ts](/bug/TS)
   - [react](/bug/react)
+  - [git&npm](/bug/git%26npm)
 - [常用工具代码](/code/readme)
   - [js](/code/js/utils)
   - [go](/code/go/utils)
