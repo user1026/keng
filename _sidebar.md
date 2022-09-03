@@ -9,6 +9,7 @@
   - [ts](/bug/TS)
   - [react](/bug/react)
   - [git&npm](/bug/git%26npm)
+  - [mysql](/bug/mysql)
 - [常用工具代码](/code/readme)
   - [js](/code/js/utils)
   - [go](/code/go/utils)
