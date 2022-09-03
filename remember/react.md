@@ -77,6 +77,23 @@ plugins: [react({
 <Route path="/about" element={<About />}></Route>
 </Routes>
 ```
+|组件名|作用|说明|
+|---------|----------|-----------|
+|\<Routers\>|一组路由|代替原有<Switch>，所有子路由都用基础的Router children来表示|
+|\<Router\>|基础路由|Router是可以嵌套的，解决原有V5中严格模式|
+|\<Link\>|导航组件|在实际页面中跳转使用|
+|\<Outlet\/\>|自适应渲染组件|根据实际路由url自动选择组件|
+
+
+|hooks名|作用|说明|
+|-----|-----|-----|
+|useParams|返回当前参数|根据路径读取参数|
+|useNavigate|返回当前路由代替原有V5中的 useHistoryuse|
+|Outlet|返回根据路由生成的element||
+|useLocation|返回当前的location 对象||
+|useRoutes|同Routers组件一样，只不过是在js中使用||
+|useSearchParams|用来匹配URL中?后面的搜索参数||
+
 
 
 ## 状态管理
