@@ -34,7 +34,7 @@ sort函数在比较时会调用每个数组项的toString()转型方法，即会
 var arr=[-7,0,-1,2,4,15,5];
 arr.sort();//[-1,-7,0,15,2,4,5]
 ```
-***带参数比较***
+<font color="blue">带参数比较</font>
 
 ### 关闭浏览器时 onbeforeunload 不起作用
 
@@ -56,6 +56,8 @@ arr.sort();//[-1,-7,0,15,2,4,5]
 
 <font color="blue">***选中时转为base64，提交时转为file***</font>
 
+### forEach不支持async await
 
+改为 普通for循环
 
 

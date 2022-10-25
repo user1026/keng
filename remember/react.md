@@ -2,13 +2,36 @@
 
 ## hook
 
->注意点
+### 注意点
 
 使用 hook 技术可以让你在不使用 class 的情况下使用 state, 及处理生命周期的回调, React 16.8.0 版本开始支持 hook 技术<br>
 hook 在 class 内部是不起作用的<br>
 Hook 使用规则:<br>
 1、只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。<br>
 2、只能在 React 的函数组件中调用 Hook,不要在其他 JavaScript 函数中调用。自定义hook 除外<br>
+
+### 常用hook说明
+
+#### <font color="red"><i>useState</i></font>
+- useState 会返回一个数组：一个 state，一个更新 state 的函数
+- 在初始化渲染期间，返回的状态 (state) 与传入的第一个参数 (initialState) 值相同
+- 你可以在事件处理函数中或其他一些地方调用这个函数。它类似 class 组件的 this.setState，但是它不会把新的 state 和旧的 state 进行合并，而是直接替换
+
+#### <font color="red"><i>useEffect</i></font>
+- effect（副作用）：指那些没有发生在数据向视图转换过程中的逻辑，如 ajax 请求、访问原生dom 元素、本地持久化缓存、绑定/解绑事件、添加订阅、设置定时器、记录日志等。
+- 副作用操作可以分两类：需要清除的和不需要清除的。
+原先在函数组件内（这里指在 React 渲染阶段）改变 dom 、发送 ajax 请求以及执行其他包含副作用的操作都是不被允许的，因为这可能会产生莫名其妙的 bug 并破坏 UI 的一致性
+- useEffect 就是一个 Effect Hook，给函数组件增加了操作副作用的能力。它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount 具有相同的用途，只不过被合并成了一个 API
+- useEffect 接收一个函数，该函数会在组件渲染到屏幕之后才执行，该函数有要求：要么返回一个能清除副作用的函数，要么就不返回任何内容
+与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。大多数情况下，effect 不需要同步地执行。在个别情况下（例如测量布局），有单独的 useLayoutEffect Hook 供你使用，其 API 与 useEffect 相同。
+>使用 useEffect(callback, dependencies)
+
+第一个为要执行的函数 callback，第二个是可选的依赖项数组 dependencies。<br>
+依赖项这个参数是可选的，callback 会根据依赖项分为以下三种情况：<br>
+
+- <font color="blue">如果不指定，那么 callback 就会在每次函数组件执行完后都执行；</font>
+- <font color="blue">如果指定了，那么只有依赖项中的值发生变化的时候，它才会执行；</font>
+- <font color="blue">如果指定为空数组，那么 callback 会在 mount （首次render）以后执行。</font>
 
 ## 生命周期
 

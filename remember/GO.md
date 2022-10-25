@@ -15,3 +15,14 @@
 
 [excelize](https://xuri.me/excelize/zh-hans/)
 ## 数据类型
+
+## Time
+
+go获取时间
+
+```GO
+timeUnix:=time.Now().Unix() //返回值为时间戳
+t:=time.Now().Format("2006-01-02 15:04:05")//2006-01-02 15:04:05为固定写法
+```
+
+# 类型转换： strconv
