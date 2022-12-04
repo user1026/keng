@@ -42,3 +42,4 @@
   - [linux常用命令](/append/linux)
   - [服务器部署相关内容](/append/serve.md)
   - [键盘对应keyCode](/append/keyCode.md)
+  - [mysql函数](/append/mysql)
