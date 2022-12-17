@@ -9,7 +9,7 @@ insert into 表名 values ("全部字段名")<br>
 insert into 表名(字段名) values (字段名对应的值)
 
 >删
-
+delete form 表名
 >改
 
 >查
