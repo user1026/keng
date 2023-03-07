@@ -347,3 +347,35 @@ export const isMobile=(s)=>{
     return /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(s)
 }
 ```
+## 导出Excel（可结合elementUI）
+准备：
+```
+npm i -s xlsx file-saver
+```
+引入
+```
+import * as XLSX from "xlsx";
+import FileSaver from "file-saver";
+```
+```js
+exportExcel(name) {
+      var xlsxParam = { raw: true };//转换成excel时，使用原始的格式
+      var wb = XLSX.utils.table_to_book(document.querySelector("#outTable"),xlsxParam);
+      var wbout = XLSX.write(wb, {
+        bookType: "xlsx",
+        bookSST: true,
+        type: "array"
+      });
+      try {
+        FileSaver.saveAs(
+          new Blob([wbout], { type: "application/octet-stream;charset=utf-8" }),
+          name+".xlsx"
+        );
+      } catch (e) {
+        if (typeof console !== "undefined") console.log(e, wbout);
+      }
+      return wbout;
+    },
+```
+
+<font color="red">注意：数据需要提前准备好</font>

@@ -141,3 +141,11 @@ const addtabs = (option) => {}
 ### 数组操作
 
 >用reactive声明的数组清空时需要设置数组长度为0
+
+### 懒加载组件（结合vite）
+
+```js
+const modules=import.meta.glob(组件路径);//例如../view/*/*.vue
+component=modules[组件路径]
+
+```

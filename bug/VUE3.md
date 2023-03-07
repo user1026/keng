@@ -78,3 +78,8 @@ list.value=arr.filter(val=>val>2);
 </template>
 
 ```
+
+### [vite] Internal server error: import.meta.glob() can only accept string literals.
+
+import.meta.glob()的参数不能是变量或者模板字符串，只能是普通字符串
+

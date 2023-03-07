@@ -34,6 +34,17 @@
  <router-view />
 ```
 
+### 解决elementui table合计不显示的问题
+有时候需要在table的底部有合计，这时候官方给的是在table里设置，show-summary就可以了
+
+但是给table加了一个固定高度话，就没有了，打开控制台可以看到这个合计是存在的
+
+```js
+this.$nextTick(() => {
+   this.$refs['table'].doLayout();
+})
+```
+
 ## Element-Plus
 
 
