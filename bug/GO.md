@@ -43,5 +43,32 @@ func (info VO.UserInfo) getUser(){//报无法在非局部类型 'VO.UserInfo' �
 - <font color="blue">创建一个常规函数而不是一个方法( func String(meter models.Meter) string )。不过，这可能不太惯用(特别是对于 String 方法)，并且也无法访问私有(private)字段(除非您在 models 包中定义函数，在这种情况下，您可以改为定义该方法) .</font><br>
 - <font color="blue">创建一个嵌入原始类型的新类型。这使用起来有点麻烦，但允许您扩展现有行为</font>
 
+## GO切片和容量
 
+```GO
+func main () {
+    q:=[]int{1,2,3,4,5,6}
+    q=q[:3]
+    fmt.Println(q,cap(q))//[1 2 3] 6
+    q=q[:1]
+    fmt.Println(q,cap(q))//[1] 6
+    q=q[:0]
+    fmt.Println(q,cap(q))//[] 6
+    q=q[:6]
+    fmt.Println(q,cap(q))//[1 2 3 4 5 6] 6
+    fmt.Println("--------------")
+    s:=[]int{1,2,3,4,5,6}
+    s=s[1:4]
+    fmt.Println(s,cap(s))//[2 3 4] 5
+    s=s[:2]
+    fmt.Println(s,cap(s))//[2 3] 5
+    s=s[1:]
+    fmt.Println(s,cap(s))//[3] 4
+    s=s[:0]
+    fmt.Println(s,cap(s))//[] 4
+    s=s[:6]
+    fmt.Println(s,cap(s))//报错panic: runtime error: slice bounds out of range [:6] with capacity 4
+}
+```
+报错原因是容量不够 s[start:end:max] start是几就减少多少容量
 

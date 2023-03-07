@@ -60,4 +60,15 @@ arr.sort();//[-1,-7,0,15,2,4,5]
 
 改为 普通for循环
 
+### Date问题
 
+```js
+console.log(new Date("2023-05-01"))//2023-05-01T00:00:00.000Z
+console.log(new Date("2023-5-01"))//2023-04-30T16:00:00.000Z
+console.log(new Date("2023-05-1"))//2023-04-30T16:00:00.000Z
+console.log(new Date("---------------"))
+console.log(new Date("2023/05/01"))//2023-04-30T16:00:00.000Z
+console.log(new Date("2023/05/1"))//2023-04-30T16:00:00.000Z
+console.log(new Date("2023/5/01"))//2023-04-30T16:00:00.000Z
+```
+正确格式是YYYY-MM-DD
