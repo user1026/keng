@@ -149,3 +149,18 @@ const modules=import.meta.glob(组件路径);//例如../view/*/*.vue
 component=modules[组件路径]
 
 ```
+
+### Pinia
+
+可以直接修改state
+```js
+const store=useStore();
+store.num++
+//也可以
+store.$patch({
+    num:store.num++
+})
+store.$patch((state)=>{
+    state.num++
+})
+```
