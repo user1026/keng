@@ -32,6 +32,7 @@
   - [redis](/remember/redis)
   - [uniapp](/remember/uniapp)
   - [设计模式](/remember/sheji)
+  - [chrome开发教程](/remember/chrome)
 - [附录](/append/readme)
   - [Blob的type](/append/blobtype) 
   - [vscode配置](/append/vscode)
