@@ -26,6 +26,7 @@
   - [react](/remember/react)
   - [GO](/remember/GO)
   - [js](/remember/JS)
+  - [css](/remember/css)
   - [ts](/remember/TS)
   - [网络](/remember/internet)
   - [MySql](/remember/mysql)

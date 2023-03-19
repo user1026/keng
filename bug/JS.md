@@ -12,7 +12,7 @@ let s=new Set()
 以上代码会报错
 
 ***个人觉得分号还是加上最好***
-### 文件下载
+### jQ文件下载
 jQ的ajax不支持blob方式下载文件，它的xhr设置resopnseType设置为blob会报错
 <font color="blue">需要用原生写ajax，并将responseType设置为blob</font>
 
@@ -28,8 +28,7 @@ form表单中的button默认的type为submit,会触发表单提交事件导致�
 
 ### sort排序不传参
 
-sort不传参,默认比较第一位的asscii码值，相同则比较第二位的asscii码值，之后以此类推<br>
-sort函数在比较时会调用每个数组项的toString()转型方法，即会将每一项转化为字符串UniCode码进行比较。
+sort函数不传参在比较时会调用每个数组项的toString()转型方法，即会将每一项转化为字符串UniCode码进行比较。
 ```javascript
 var arr=[-7,0,-1,2,4,15,5];
 arr.sort();//[-1,-7,0,15,2,4,5]
