@@ -44,3 +44,4 @@
   - [服务器部署相关内容](/append/serve.md)
   - [键盘对应keyCode](/append/keyCode.md)
   - [mysql函数](/append/mysql)
+  - [vpn](/append/vpn)
