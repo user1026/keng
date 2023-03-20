@@ -38,4 +38,6 @@
   * [vscode](/append/vscode.md)
   * [markdown](/append/markdown.md)
   * [go教程](/append/go.md)
+  * [三剑客面试题](/append/mianshi)
+  * [vue面试题](/append/vueM)
   
