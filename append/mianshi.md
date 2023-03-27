@@ -13,8 +13,10 @@ HTML标签的语义化，简单来说，就是用正确的标签做正确的事�
 
 > 块状元素&内联元素？
 
-块级元素：display:block/table;有 div h1 h2 table ul ol p 等
-内联元素：display:inline/inline-block;有 span img input button 等
+块级元素：占据其父元素（容器）的整个空间，创建了一个“块”。通常浏览器会在块级元素前后另起一行，能容纳其他块元素或者内联元素。display:block/table;有 div h1 h2 table ul ol p 等
+内联元素：只占据它对应标签的边框所包含的空间，只能容纳文本或者其他内联元素的元素。display:inline/inline-block;有 span img input button 等
+
+
 
 > h5 新增的标签和属性
 
@@ -95,16 +97,50 @@ href属性中的url可以是浏览器支持的任何协议，所以a标签可以
 锚点可以在点击时快速定位到一个页面的某个位置，而下载的原理在于a标签所对应的资源浏览器无法解析，于是浏览器会选择将其下载下来。
 
 >cookie,localStorage,sessionStorage
+
 cookie的大小是受限的，并且每次请求一个新页面时， cookie都会被发送过去，这样无形中浪费了带宽。另外， cookie还需要指定作用域，不可以跨域调用。<br>
 localStorage用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。<br>
-
 sessionStorage用于在本地存储一个会话（ session）中的数据，这些数据只有同一个会话中的页面才能访问，当会话结来后，数据也随之销毀。因此 sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。
 >如何实现浏览器内多个标签页之间的通信？
 
 在标签页之间，调用 localstorge、 cookies等数据存储，可以实现标签页之间的通信
->
 
->
+>script标签中defer和async的区别
+
+如果没有defer或async属性，浏览器会立即加载并执行相应的脚本。它不会等待后续加载的文档元素，读取到就会开始加载和执行，这样就阻塞了后续文档的加载。<br>
+defer 和 async属性都是去异步加载外部的JS脚本文件，它们都不会阻塞页面的解析，其区别如下：
+
+- 执行顺序： 多个带async属性的标签，不能保证加载的顺序；多个带defer属性的标签，按照加载顺序执行；
+- 脚本是否并行执行：async属性，表示后续文档的加载和执行与js脚本的加载和执行是并行进行的，即异步执行；defer属性，加载后续文档的过程和js脚本的加载(此时仅加载不执行)是并行进行的(异步)，js脚本需要等到文档所有元素解析完成之后才执行，DOMContentLoaded事件触发执行之前。
+
+>常⽤的meta标签有哪些
+
+meta 标签由 name 和 content 属性定义，用来描述网页文档的属性，比如网页的作者，网页描述，关键词等，除了HTTP标准固定了一些name作为大家使用的共识，开发者还可以自定义name。
+常用的meta标签：
+1. charset，用来描述HTML文档的编码类型：
+2. keywords，页面关键词
+3. description，页面描述
+4. refresh，页面重定向和刷新
+5. viewport，适配移动端，可以控制视口的大小和比例
+<br>
+其中，content 参数有以下几种：
+- width viewport ：宽度(数值/device-width)
+- height viewport ：高度(数值/device-height)
+- initial-scale ：初始缩放比例
+- maximum-scale ：最大缩放比例
+- minimum-scale ：最小缩放比例
+- user-scalable ：是否允许用户缩放(yes/no）
+
+（6）搜索引擎索引方式：
+<br>
+其中，content 参数有以下几种：
+- all：文件将被检索，且页面上的链接可以被查询；
+- none：文件将不被检索，且页面上的链接不可以被查询；
+- index：文件将被检索；
+- follow：页面上的链接可以被查询；
+- noindex：文件将不被检索；
+- nofollow：页面上的链接不可以被查询。
+
 
 >
 
@@ -207,8 +243,7 @@ sessionStorage用于在本地存储一个会话（ session）中的数据，这�
 - sticky	粘性定位，它是 relative 和 fixed 的结合体，能够实线类似吸附的效果，当滚动页面时它的效果与 relative 相同，当要滚动到屏幕之外时则会自动变成 fixed 的效果。
 >css可以继承属性
 
-一是 文本相关的属性： font-family, font-size, font-style,font-variant, font-weight, font, letter-spacing,line-height，text-align, text-indent, text-transform,word-spacing ,color
-
+一是 文本相关的属性： font-family, font-size, font-style,font-variant, font-weight, font, letter-spacing,line-height，text-align, text-indent, text-transform,word-spacing ,color<br>
 二是 列表相关的属性： list-style-image, list-style-position,list-style-type, list-style
 > rem是什么及 px，em，rem的区别？
 
@@ -289,14 +324,41 @@ Object.prototype.toString.call()
 2. 属性和方法被加入到 this 引用的对象中。
 3. 新创建的对象由 this 所引用，并且最后隐式的返回 this 。
 
->
+>JavaScript作用域与作用域链
+
+作用域：<br>
+简单来说，作用域是指程序中定义变量的区域，它决定了当前执行代码对变量的访问权限<br>
+作用域链：<br>
+当可执行代码内部访问变量时，会先查找当前作用域下有无该变量，有则立即返回，没有的话则会去父级作用域中查找...一直找到全局作用域。我们把这种作用域的嵌套机制称为作用域链<br>
+
+
+>说说你对原型链的理解？
+
+每个函数（类）天生自带一个属性prototype，属性值是一个对象，里面存储了当前类供实例使用的属性和方法 「（显示原型）」<br>
+在浏览器默认给原型开辟的堆内存中有一个constructor属性：存储的是当前类本身（⚠️注意：自己开辟的堆内存中默认没有constructor属性，需要自己手动添加）「（构造函数）」<br>
+每个对象都有一个__proto__属性，这个属性指向当前实例所属类的原型（不确定所属类，都指向Object.prototype）「（隐式原型）」<br>
+当你试图获取一个对象的某个属性时，如果这个对象本身没有这个属性，那么它会去它的隐式原型__proto__（也就是它的构造函数的显示原型prototype）中查找。「（原型链）」<br>
+
+>说说什么是模块化开发？
+
+模块化的开发方式可以提高代码复用率，方便进行代码的管理。通常一个文件就是一个模块，有自己的作用域，只向外暴露特定的变量和函数。
+
+>闭包
+
+外部环境可以访问函数内部变量<br>
+优点
+1. 可以从内部函数访问外部函数的作用域中的变量，且访问到的变量长期驻扎在内存中，可供之后使用
+2.避免变量污染全局
+3. 把变量存到独立的作用域，作为私有成员存在
+<br>
+缺点
+1. 对内存消耗有负面影响。因内部函数保存了对外部变量的引用，导致无法被垃圾回收，增大内存使用量，所以使用不当会导致内存泄漏
+2. 对处理速度具有负面影响。闭包的层级决定了引用的外部变量在查找时经过的作用域链长度
+3. 可能获取到意外的值(captured value)
 
 >
 
 >
 
->
+## 算法题
 
->
-
->
