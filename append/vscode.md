@@ -1,7 +1,9 @@
-# VSCode 相关配置和问题
+# 编辑器配置和相关问题
 
 windows10操作系统！！！！！
-## VSCode 快捷键
+
+## VSCode
+### VSCode 快捷键
 
 >1、快速复制一行
 
@@ -61,8 +63,8 @@ windows10操作系统！！！！！
 快捷键 Ctrl + shift + 左箭头/ 右箭头
 ```
 
-## 问题
-### open in brower 找不到chrome
+### vscode问题
+> open in brower 找不到chrome
 
 找到chrome.exe的地址（桌面快捷方式复制目标的地址，复制到chrome.exe即可），然后填入open in brower插件设置里或者在vscode里的setting.son里设置<br>
 样例：<br>
@@ -74,3 +76,12 @@ windows10操作系统！！！！！
 //正确示范
 "open-in-browser.default":"C:\\Users\\Administrator\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe"
 ```
+## goland
+
+### goland问题
+
+>下完包飘红
+
+先删除.idea文件，再打开goland然后右键go.mod选择Go Mod Tidy
+
+
