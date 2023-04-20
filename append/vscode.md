@@ -83,3 +83,5 @@ windows10操作系统！！！！！
 >下完包飘红
 
 先删除.idea文件，再打开goland然后右键go.mod选择Go Mod Tidy
+
+
