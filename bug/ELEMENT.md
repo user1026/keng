@@ -44,6 +44,12 @@ this.$nextTick(() => {
    this.$refs['table'].doLayout();
 })
 ```
+### 解决存在多级表头时导出合计错乱
+
+```js
+document.querySelectorAll('.el-table__footer td').forEach(v=>v.setAttribute('rowspan', '1'));
+```
+
 
 ## Element-Plus
 
