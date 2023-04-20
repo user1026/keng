@@ -10,9 +10,19 @@ runtime.EventsEmit(Global.Global_ConText, "openFile", "123")
 ```
 
 ```js
-//js接收数据
+//js接收数据,其中data是个数组
 window.runtime.EventsOn("openFile",(data)=>{
     count.value=data;
     console.log(data);
 })
 ```
+
+## js主动向Go发送数据
+
+```js
+```
+
+```GO
+```
+
+## 
