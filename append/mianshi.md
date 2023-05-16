@@ -312,7 +312,7 @@ CSS Sprite精灵图 把一堆小的图片整合到一张大的图片<br>
 ## JS
 
 >JavaScript的数据类型都有什么？
-- 基本数据类型：Number、String、Boolean、Null、Undefined
+- 基本数据类型：Number、String、Boolean、Null、Undefined （es6新增：Symbol，bigInt）
 - 复杂数据类型：Object（Function、Array、Date、RegExp）
   
 >如何判断某变量数据类型？
