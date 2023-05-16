@@ -358,9 +358,9 @@ import * as XLSX from "xlsx";
 import FileSaver from "file-saver";
 ```
 ```js
-exportExcel(name) {
-      var xlsxParam = { raw: true };//转换成excel时，使用原始的格式
-      var wb = XLSX.utils.table_to_book(document.querySelector("#outTable"),xlsxParam);
+exportExcel(dom,name,raw=true) {
+      var xlsxParam = { raw };//转换成excel时，使用原始的格式
+      var wb = XLSX.utils.table_to_book(document.querySelector(dom),xlsxParam);
       var wbout = XLSX.write(wb, {
         bookType: "xlsx",
         bookSST: true,
@@ -380,8 +380,48 @@ exportExcel(name) {
 
 <font color="red">注意：数据需要提前准备好</font>
 
-## 页面粘贴图片并展示
+
+
+## 页面复制粘贴图片
 
 ```HTML
+<textarea id="txt"></textarea>
+<img id="showImg"  src=""/>
+```
 
+```JS
+document.getElementById("txt").addEventListener("paste", function (e) {
+
+    let items = event.clipboardData && event.clipboardData.items;
+    let file = null;
+    if (items && items.length) {
+        // 检索剪切板items中类型带有image的
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+                file = items[i].getAsFile(); // 此时file就是剪切板中的图片文件
+                break;
+            }
+        }
+    }
+    changepic(files)
+}, false); 
+
+  function changepic(files) {
+      
+        var newsrc=getObjectURL(files);
+        document.getElementById('showImg').src=newsrc;
+    }
+    //建立一個可存取到該file的url
+    function getObjectURL(file) {
+        var url = null ;
+        // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
 ```
