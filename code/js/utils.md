@@ -379,3 +379,9 @@ exportExcel(name) {
 ```
 
 <font color="red">注意：数据需要提前准备好</font>
+
+## 页面粘贴图片并展示
+
+```HTML
+
+```
