@@ -265,7 +265,7 @@ function getInternetType(){
 ```js
 export const FileToBase64=(file,base64url)=>{
     let reader=new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsdataUrl(file);
     reader.onload=(e)=>{
          let base64=e.target.result;
         base64url(base64)
@@ -279,7 +279,7 @@ FileToBase64(file,(base64url)=>{
 ```js
 export const FileToBase64=(file)=>{
     let reader=new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsdataUrl(file);
     return new Promise((resolve, reject) => {
         reader.onload=(e)=>{
             let base64=e.target.result;
@@ -300,11 +300,11 @@ export const Base64ToFile=(base64,fileName)=>{
     let arr=base64.split(","),
      mime=arr[0].match(/:(.*?);/)[1],
      fileType=mime.split("/")[1],
-     bstr=window.atob(arr[1]),
-     n=bstr.length,
+     baseStr=window.atob(arr[1]),
+     n=baseStr.length,
      uBarr=new Uint8Array(n);
     while(n--){
-        uBarr[n]=bstr.charCodeAt(n)
+        uBarr[n]=baseStr.charCodeAt(n)
     }
     return new File([uBarr],`${fileName}.${fileType}`,{type:mime})
 }
@@ -312,14 +312,14 @@ export const Base64ToFile=(base64,fileName)=>{
 >base64转Blob
 
 ```js
-export const  Base64ToBlob=(dataurl, filename)=> {
-    var arr = dataurl.split(','),
+export const  Base64ToBlob=(dataUrl, filename)=> {
+    var arr = dataUrl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
+        baseStr = atob(arr[1]),
+        n = baseStr.length,
         u8arr = new Uint8Array(n);
     while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
+        u8arr[n] = baseStr.charCodeAt(n);
     }
     return new Blob([u8arr], { type: mime });
 }
@@ -403,13 +403,13 @@ document.getElementById("txt").addEventListener("paste", function (e) {
             }
         }
     }
-    changepic(files)
+    changePic(files)
 }, false); 
 
-  function changepic(files) {
+  function changePic(files) {
       
-        var newsrc=getObjectURL(files);
-        document.getElementById('showImg').src=newsrc;
+        var newSrc=getObjectURL(files);
+        document.getElementById('showImg').src=newSrc;
     }
     //建立一個可存取到該file的url
     function getObjectURL(file) {
