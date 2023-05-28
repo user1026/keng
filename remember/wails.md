@@ -25,4 +25,11 @@ window.runtime.EventsOn("openFile",(data)=>{
 ```GO
 ```
 
-## 
+## app 内的函数在js中使用方法
+
+```Go
+
+```
+
+```js
+```
