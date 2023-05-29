@@ -65,11 +65,12 @@ watch([() => book.name, count], ([name, count], [preName, preCount]) => {
 
 > 父传子
 
-父组件
+父组件(同vue2)
 ```javascript
 ```
-子组件
+子组件接收
 ```javascript
+const props=defineProps(["value"]);//使用props.value
 ```
 > 父组件调用子组件方法
 
