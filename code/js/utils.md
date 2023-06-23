@@ -425,3 +425,6 @@ document.getElementById("txt").addEventListener("paste", function (e) {
         return url ;
     }
 ```
+
+## javascript解决小数的加减乘除精度丢失的方案
+

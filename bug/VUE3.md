@@ -83,3 +83,6 @@ list.value=arr.filter(val=>val>2);
 
 import.meta.glob()的参数不能是变量或者模板字符串，只能是普通字符串
 
+### peError: Cannot use 'in' operator to search for '_ec_inner' in null
+方法传参错误
+
