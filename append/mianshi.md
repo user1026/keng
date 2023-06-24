@@ -348,7 +348,7 @@ Object.prototype.toString.call()
 外部环境可以访问函数内部变量<br>
 优点
 1. 可以从内部函数访问外部函数的作用域中的变量，且访问到的变量长期驻扎在内存中，可供之后使用
-2.避免变量污染全局
+2. 避免变量污染全局
 3. 把变量存到独立的作用域，作为私有成员存在
 <br>
 缺点
@@ -356,9 +356,187 @@ Object.prototype.toString.call()
 2. 对处理速度具有负面影响。闭包的层级决定了引用的外部变量在查找时经过的作用域链长度
 3. 可能获取到意外的值(captured value)
 
->
+>继承
 
->
+1. 原型链继承
 
+- 原理： 让父类中的属性和方法在子类实例的原型链上
+- 缺点：多个实例对<font color="red">引用类型</font>的操作会被篡改，因为他们指向同一个父类的实例
+
+```js
+function Father (){
+  this.name="1";
+}
+Father.prototype.log=function(){
+  console.log(this,"this");
+}
+function Child(){}
+Child.prototype=new Father();
+var child1=new Child();
+var child2=new Child();
+console.log(child1.prototype==child2.prototype)//true
+```
+
+2. 借用构造函数继承
+
+- 原理：在子类方法中把父类的方法当作普通函数来执行，让父类中的this指向子类的实例，相当于给子类实例是设置了很多私有的属性和方法
+- 特点：可以在子类构造函数中向父类传参数，父类的引用属性不会被共享
+- 缺点：
+  - 只能继承父类的实例属性和方法，不能继承原型属性/方法
+  - 无法实现复用，因为父类私有变为子类私有，每个子类都有父类实例函数的副本，影响性能
+
+```js
+function Father (){
+  this.name="1";
+}
+Father.prototype.log=function(){
+  console.log(this,"this");
+}
+function Child(){
+   Father.call(this)
+}
+var child=new Child();
+console.log(child.name)//1
+console.log(child.log())//访问不到
+```
+
+3. 组合继承
+- 原理： 综合借用构造函数继承和原型链继承
+- 特点：组合继承综合了原型链继承和盗用构造函数继承(构造函数继承)，将两者的优点结合了起来，基本的思路就是使用原型链继承原型上的属性和方法，而通过构造函数继承实例属性，这样既可以把方法定义在原型上以实现重用，又可以让每个实例都有自己的属性
+
+```js
+function Father(name){
+  this.name = name;
+  this.colors = ["red", "blue", "green"];
+}
+Father.prototype.sayName = function(){
+  console.log(this.name);
+};
+
+function Child(name, age){
+  // 继承属性
+  // 第二次调用Father()
+  Father.call(this, name);
+  this.age = age;
+}
+
+// 继承方法
+// 构建原型链
+// 第一次调用Father()
+Child.prototype = new Father(); 
+// 重写Child.prototype的constructor属性，指向自己的构造函数Child
+Child.prototype.constructor = Child; 
+Child.prototype.sayAge = function(){
+  console.log(this.age);
+};
+
+var instance1 = new Child("Nicholas", 29);
+instance1.colors.push("black");
+console.log(instance1.colors); //"red,blue,green,black"
+instance1.sayName(); //"Nicholas";
+instance1.sayAge(); //29
+
+var instance2 = new Child("Greg", 27);
+console.log(instance2.colors); //"red,blue,green"
+instance2.sayName(); //"Greg";
+instance2.sayAge(); //27
+
+instance1.sayName(); //"Nicholas";
+instance1.sayAge(); //29
+console.log(instance1.prototype==instance2.prototype)
+```
+
+4. 原型式继承
+
+- 原理：对参数对象的一种浅复制
+- 特点：父类方法可复用
+- 缺点 父类的引用会被所有子类所共享，子类实例不能向父类传参
+
+```js
+function objectCopy(obj) {
+  function Fun() { };
+  Fun.prototype = obj;
+  return new Fun()
+}
+
+let father = {
+  name: "yhd",
+  age: 18,
+  friends: ["jack", "tom", "rose"],
+  sayName:function() {
+    console.log(this.name);
+  }
+}
+
+let father1 = objectCopy(father);
+father1.name = "wxb";
+father1.friends.push("lily");
+father1.sayName(); // wxb
+
+let father2 = objectCopy(father);
+father2.name = "gsr";
+father2.friends.push("kobe");
+father2.sayName(); // "gsr"
+
+console.log(father.friends); // ["jack", "tom", "rose", "lily", "kobe"]
+```
+
+5. 寄生式继承
+
+- 原理：使用原型式继承对一个目标对象进行浅复制，增强这个浅复制的能力
+
+
+6. 寄生式组合继承
+
+- 原理：
+- 特点：只调用一次父类构造函数，Child可以向Parent传参，父类方法可以复用，父类的引用属性不会被共享
+
+```js
+function objectCopy(obj) {
+  function Fun() { };
+  Fun.prototype = obj;
+  return new Fun();
+}
+
+function inheritPrototype(child, parent) {
+  let prototype = objectCopy(parent.prototype); // 创建对象
+  prototype.constructor = child; // 增强对象
+  Child.prototype = prototype; // 赋值对象
+}
+
+function Parent(name) {
+  this.name = name;
+  this.friends = ["rose", "lily", "tom"]
+}
+
+Parent.prototype.sayName = function () {
+  console.log(this.name);
+}
+
+function Child(name, age) {
+  Parent.call(this, name);
+  this.age = age;
+}
+
+inheritPrototype(Child, Parent);
+Child.prototype.sayAge = function () {
+  console.log(this.age);
+}
+
+let child1 = new Child("yhd", 23);
+child1.sayAge(); // 23
+child1.sayName(); // yhd
+child1.friends.push("jack");
+console.log(child1.friends); // ["rose", "lily", "tom", "jack"]
+
+let child2 = new Child("yl", 22)
+child2.sayAge(); // 22
+child2.sayName(); // yl
+console.log(child2.friends); // ["rose", "lily", "tom"]
+```
+
+7. es6的class继承
+
+基本原理和6是差不多的
 ## 算法题
 
