@@ -1,10 +1,8 @@
 # mysql
 
-<<<<<<< HEAD
 ## SQl语法
 
 ## SQL函数
-=======
 
 ## 简单语句
 
@@ -65,4 +63,3 @@ select distinct age from stu
 
 
 ### 联表查询
->>>>>>> 6096416572f86b59a6e3382cbd1302a2498fe4c8
