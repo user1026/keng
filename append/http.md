@@ -1,4 +1,6 @@
-# http状态码
+# HTTP相关
+
+## http状态码
 
 | 状态码 | 英文描述                        | 中文描述                                                                                                                                                         |
 | ------ | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -48,7 +50,7 @@
 | 504    | Gateway Time-out                | 充当网关或代理的服务器，未及时从远端服务器获取请求                                                                                                               |
 | 505    | HTTP Version not supported      | 服务器不支持请求的HTTP协议的版本，无法完成处理                                                                                                                   |
 
-### 常见的Content-type类型
+## 常见的Content-type类型
 
 Content-type是Http的实体首部字段，在request的请求行（或response的状态码）之后，也是首部的一部分。用于说明请求或返回的消息主体是用何种方式编码.<br>
 MediaType，即是Internet Media Type，互联网媒体类型；也叫做MIME类型，在Http协议消息头中，使用Content-Type来表示具体请求中的媒体类型信息。<br>
@@ -70,3 +72,34 @@ parameter 可选，一些参数，如Accept请求头的q参数， Content-Type�
 | text/plain                        | 纯文本格式                                                                                          |
 | image/gif                         | gif图片格式                                                                                         |
 | application/pdf                   | pdf格式                                                                                             |
+
+
+
+## 常见的HTTP请求头和响应头
+
+|HTTP Request Header|定义|
+|----|----|
+|Accept|浏览器能够处理的内容类型|
+|Accept-Charset|浏览器能够显示的字符集|
+|Accept-Encoding|浏览器能够处理的压缩编码|
+|Accept-Language|浏览器当前设置的语言|
+|Connection|浏览器与服务器之间连接的类型|
+|Cookie|浏览器当前页面设置的任何Cookie|
+|Host|当前发出请求的页面所在的域|
+|Referer|当前发出请求的页面的URL|
+|User-Agent|浏览器的用户代理字符串|
+
+|HTTP Responses Header|定义|
+|----|----|
+|Date|表示消息发送的时间，时间的描述格式由rfc822定义|
+|server|服务器名称|
+|Connection|浏览器与服务器之间连接的类型|
+|Cache-Control|控制HTTP缓存|
+|content-type|表示后面的文档属于什么MIME类型|
+
+|Content-Type|定义|
+|----|----|
+|application/x-www-form-urlencoded|浏览器原生form表单|
+|multipart/form-data|表单上传文件|
+|application/json|服务器消息主体是序列化后的 JSON 字符串|
+|text/xml|提交 XML 格式的数据|

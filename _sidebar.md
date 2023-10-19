@@ -36,6 +36,7 @@
   - [设计模式](/remember/sheji)
   - [chrome开发教程](/remember/chrome)
   - [wails](/remember/wails)
+  - [electron](/remember/electron)
 - [附录](/append/readme)
   - [Blob的type](/append/blobtype) 
   - [vscode配置](/append/vscode)
