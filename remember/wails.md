@@ -33,3 +33,5 @@ window.runtime.EventsOn("openFile",(data)=>{
 
 ```js
 ```
+
+# wails窗体配置

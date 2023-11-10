@@ -171,8 +171,12 @@ component = modules[组件路径];
 //Global.js
 import { ref, reactive } from "vue";
 export const Global = reactive({
-    //属性代码
+    a:"1"//属性代码
 });
+```
+watch
+```js
+watch(()=>Global.a,()=>{})
 ```
 
 #### Pinia
@@ -190,3 +194,13 @@ store.$patch((state) => {
     state.num++;
 });
 ```
+
+## 获取dom元素
+
+```html
+<div ref="div"></div>
+```
+```js
+let div =ref()
+```
+<font color="red">ref放在真实dom上获取的是dom元素，放在子组件上就是获取子组件</font>
