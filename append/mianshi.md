@@ -574,6 +574,10 @@ child2.sayName(); // yl
 console.log(child2.friends); // ["rose", "lily", "tom"]
 ```
 
+7. es6的class继承
+
+基本原理和6是差不多的
+
 >JavaScript 中内存泄漏的几种情况？
 
 内存泄漏一般是指系统进程不再用到的内存，没有及时释放，造成内存资源浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。
@@ -595,9 +599,44 @@ console.log(child2.friends); // ["rose", "lily", "tom"]
 
 
 
-7. es6的class继承
 
-基本原理和6是差不多的
+> 各种宽度，高度
+
+1. screen.width：屏幕的宽。screen.height：屏幕的高。(指的显示器显示区域的宽高)
+2. screen.availWidth：可利用的宽，等于屏幕的宽。screen.availHeight：可利用的高，等于屏幕的高减去 mac 顶部栏或 windows 底部栏。
+3. screenTop：浏览器窗口左上角到屏幕上边缘的距离。screenLeft：浏览器窗口左上角到屏幕左边缘的距离。Firefox 浏览器不支持上述属性，但是可以使用👇:
+- screenX：等于 screenLeft。
+- screenY：等于 screenTop。
+- 注意：
+  - chrome/Opera:保存的是浏览器窗口左上角相对于屏幕的距离，全屏时四个值均为0
+  - Firefox/Safari:保存的是浏览器窗口左上角相对于屏幕的距离
+  - 当浏览器窗口全屏化时指的是整个浏览器与屏幕左上角的距离，因为在全屏化的时候浏览器边缘8px的边框不显示，所以screenX和screenY为-8
+  - IE:保存的是浏览器窗口文档显示区域的左上角相对于屏幕左上角的位置。网页顶部到屏幕顶部的距离：window.screenTop（浏览器全屏为工具栏的高度），网页左边到屏幕左边的距离：window.screenLeft（浏览器全屏为0）
+  - ie9+，浏览器窗口全屏化时screenX和screenY为-8
+4. window.outerWidth：浏览器窗口的宽。window.outerHeight：浏览器窗口的高。
+ - 注意：
+   - 在Chrome和Opera中，当浏览器窗口全屏化时，outerWidth和outerHeight指的是可以看到的浏览器部分所占据的空间。
+   - 在FireFox、Safari、IE9和IE10中，当浏览器窗口全屏化时，outerWidth和outerHeight指的不仅是可以看到的浏览器所占据的空间，还包括其未显示部分。当浏览器窗口退出全屏化时，其四周会有8px的边框。而当浏览器窗口全屏化时，边框虽然未被显示，但仍然是计算在outerWidth和outerHeight内。 
+   - IE7、8不支持。
+
+5. window.innerWidth：视口的宽。window.innerHeight：视口的高。（指可视窗口的宽高，包含滚动条的宽高）
+6. clientWidth：内容可视区的宽度。clientHeight：内容可视区的高度。 （指文档可视内容的宽高，不包含滚动条的宽高）
+7. scrollWidth：实际内容的宽度。没有垂直滚动条时与clientWidth相同。否则是等于实际内容的宽度 + padding。scrollWidth也包括 ::before 和 ::after这样的伪元素。scrollHeight：实际内容的高度。没有垂直滚动条时与clientHeight相同。否则是等于实际内容的高度 + padding。scrollHeight也包括 ::before 和 ::after这样的伪元素。
+8. scrollLeft：元素最左端和窗口中可见内容的最左端之间的距离。即当前左滚的距离，scrollTop：元素最顶端和窗口中可见内容的最顶端之间的距离。即当前上滚的距离
+
+9. 偏移量包括元素在屏幕上占用的所有可见的空间。元素的可见大小由其高度、宽度决定，包括所有内边距、滚动条和边框大小（注意，不包括外边距）。
+- offsetHeight：元素在垂直方向上占用的空间大小，包括元素的高度、（可见的）水平滚动条的高度、上边框高度和下边框高度。
+- offsetWidth：元素在水平方向上占用的空间大小。包括元素的宽度、（可见的）垂直滚动条的宽度、左边框宽度和右边框宽度。
+- offsetLeft：当前元素内容区域（包括border）左边缘到 offsetParent 内容区域（不包括border）左边缘的距离。
+- offsetTop：当前元素内容区域（包括border）顶部到 offsetParent 内容区域（不包括border）顶部的距离。
+- offsetWidth = 元素宽 + padding（左右）+ border（左右）+ 滚动条宽度
+
+
+
+
+
+
+
 
 
 
