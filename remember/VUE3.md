@@ -204,3 +204,13 @@ store.$patch((state) => {
 let div =ref()
 ```
 <font color="red">ref放在真实dom上获取的是dom元素，放在子组件上就是获取子组件</font>
+
+## 深度选择
+
+>vue2
+
+::v-deep 元素
+
+>vue3
+
+:deep(元素)

@@ -428,3 +428,8 @@ document.getElementById("txt").addEventListener("paste", function (e) {
 
 ## javascript解决小数的加减乘除精度丢失的方案
 
+
+## node起一个简单服务器
+
+```js
+```
