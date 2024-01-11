@@ -428,6 +428,68 @@ document.getElementById("txt").addEventListener("paste", function (e) {
 
 ## javascript解决小数的加减乘除精度丢失的方案
 
+>big.js
+
+>数字转字符串计算
+
+```js
+let  HighPrecisionJs=(num1,type,num2)=>{
+  num1=String(num1)
+  num2=String(num2)
+  num1=num1.split(".")
+  num2=num2.split(".")
+  let NumInt1=num1[0];
+  let NumDouble1=num1.length>1?num1[1]:"";
+  let NumInt2=num2[0];
+  let NumDouble2=num2.length>1?num2[1]:"";
+  let NumDouble=Compute(NumDouble1,NumDouble2,false);
+  let NumInt=Compute(NumInt1,NumInt2,true,NumDouble[1])
+  return NumInt[1]==1?`1${NumInt[0]}.${NumDouble[0]}`:`${NumInt[0]}.${NumDouble[0]}`
+}
+
+let Compute=(num1,num2,type,double=0)=>{
+  let n=0;
+  if(num1.length==num2.length){
+
+  }else if(num1.length>num2.length){
+      num2=addZero(num2,num1.length-num2.length,type)
+  }else{
+      num1=addZero(num1,num2.length-num1.length,type)
+  }
+  let res=[];
+  for(let i=num1.length-1;i>=0;i--){
+    if(i==num1.length-1){
+     res[i]=Number(num1[i])+Number(num2[i])+double;
+    }else{
+      res[i]=Number(num1[i])+Number(num2[i])+n;
+    }
+   if(res[i]>9){
+      res[i]=res[i]%10
+      n=1;
+   }else{
+      n=0;
+   }
+  }
+  return [res.join(""),n]
+}
+let  addZero=(num,length,position=true)=>{
+  let zero=new Array(length).fill("0");
+//   let zero=""
+//   for(let i=0;i<length;i++){
+//       zero+="0";
+//   }
+ 
+//  return position?zero+num:num+zero;
+ return position?[...zero,...num]:[...num,...zero];
+}
+console.time()
+
+console.log(HighPrecisionJs('0.9999999999999',"+",'0.11111111111111111111111111111111111111111'))
+console.timeEnd()
+
+
+
+```
 
 ## node起一个简单服务器
 
