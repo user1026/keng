@@ -331,6 +331,25 @@ export const BlobToFile=(blob,fileName,fileType)=> {
     return new File([blob], fileName, { type: fileType })
 }
 ```
+
+>file转binary
+
+```js
+export const FileToBinary=()>{
+     let reader=new FileReader();
+    reader.readAsBinaryString(file);
+    return new Promise((resolve, reject) => {
+        reader.onload=(e)=>{
+            let base64=e.target.result;
+            resolve(base64)
+        }
+        reader.onerror=(e)=>{
+            reject(e)
+        }
+    })
+}
+```
+
 ## 正则
 
 常用正则以及正则测试推荐浏览器插件FeHelper

@@ -217,3 +217,6 @@ afterEach((to,form)=>{})//后置守卫
 6. $route.query：一个键值对对象，表示url查询参数
 7. $route.matched：一个包含了当前路由的所有嵌套路径片段的路由记录（routes配置数组中的对象副本）
 8. $route.redirectedFrom：重定向来源的路由的名字，如果存在重定向的话。
+## 深度选择
+
+
