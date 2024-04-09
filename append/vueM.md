@@ -214,3 +214,36 @@ vueRouter 有哪几种导航守卫？
 
 
 
+## vue2与vue3对比
+
+Vue 2 和 Vue 3 是 Vue.js 框架的两个不同版本。Vue 3 在设计上进行了重构，以提供更好的性能、更多的工具库支持和更清晰的代码结构。
+
+主要区别：
+
+1. diff算法的提升
+  - vue2中的虚拟DOM是全量的对比，也就是不管是写死的还是动态节点都会一层层比较，浪费时间在静态节点上。
+  - vue3新增静态标记（patchflag ），与之前虚拟节点对比，只对比带有patch flag 的节点，可通过flag信息得知当前节点要对比的具体内容。
+2. 静态提升
+   - vue2不管是否参与更新，都会重新创建再渲染。
+   - vue3对于不参与更新的元素，会做静态提升，只被创建一次，在渲染时直接复用即可。
+3. 生命周期
+  |vue2|vue3|
+  |----|---|
+  |beforeCreate||
+  |created||
+  |beforeMount|onBeforeMount|
+  |mounted|onMounted|
+  |beforeUpdate|onBeforeUpdate|
+  |updated|onUpdated|
+  |beforeDestroy|onBeforeUnmount|
+  |destroyed|onUnmounted|
+
+4. 双向绑定（响应式原理）
+   - vue2 Object.defineProperty 缺点：无法监听对象或数组新增、删除的元素
+     - Vue2 相应解决方案：针对常用数组原型方法push、pop、shift、unshift、splice、sort、reverse进行了hack处理；提供Vue.set监听对象/数组新增属性。对象的新增/删除响应，还可以new个新对象，新增则合并新属性和旧对象；删除则将删除属性后的对象深拷贝给新对象。
+   - vue3 Proxy 
+5. API
+   - vue2 选项API ，一个逻辑会散乱在文件不同位置（data、props、computed、watch、生命周期钩子等），导致代码的可读性变差。当需要修改某个逻辑时，需要上下来回跳转文件位置。
+   - vue3 组合式API， 则很好地解决了这个问题，可将同一逻辑的内容写到一起，增强了代码的可读性、内聚性，其还提供了较为完美的逻辑复用性方案。
+6. TS
+   - vue3有更好的TS支持

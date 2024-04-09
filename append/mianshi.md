@@ -81,6 +81,20 @@ src和href都是HTML中特定元素的属性，都可以用来引入外部的资
 - src：全称source，它通常用于img、video、audio、script元素，通过src指向请求外部资源的来源地址，指向的内容会嵌入到文档中当前标签所在位置，在请求src资源时，它会将资源下载并应用到文档内，比如说：js脚本、img图片、frame等元素。当浏览器解析到该元素时，会暂停其它资源下载，直到将该资源加载、编译、执行完毕。这也是为什么将js脚本放在底部而不是头部的原因。
 - href：全称hyper reference，意味着超链接，指向网络资源，当浏览器识别到它指向的⽂件时，就会并⾏下载资源，不会停⽌对当前⽂档的处理，通常用于a、link元素。
 
+>inline（行内）元素的特点
+
+1. 行内元素不会独占一行，多个行内元素会排成一行，直到充满整行之后再换行。
+2. 行内元素不能设置width和height属性，它的宽和高是元素内容的宽和高。
+2. 设置margin和padding属性时，margin-top，margin-bottom，padding-top，padding-bottom无效。行内元素的padding-top和padding-bottom在浏览器中会显示出效果，但是并没有实际作用，对周围的元素没有影响。
+>inline-block的特点：
+
+1. 设置为inline-block的元素仍然呈现为inline元素，但是其中的内容作为block内容呈现。
+2. width，height，margin，padding属性有效。
+3. 相邻的元素仍然在同一行内排列。
+>block元素的特点：
+
+1. 块级元素前后会单独换行。
+2. 块级元素设置width,height,margin,padding属性有效。
 >img上 title 与 alt
 
 - alt：全称alternate，切换的意思，如果无法显示图像，浏览器将显示alt指定的内容
@@ -142,9 +156,22 @@ meta 标签由 name 和 content 属性定义，用来描述网页文档的属性
 - nofollow：页面上的链接不可以被查询。
 
 
->
+## H5
 
->
+>谈谈对html5的了解
+
+1. 良好的移动性，以移动设备为主。
+2. 响应式设计，以适应自动变化的屏幕尺寸
+3. 支持离线缓存技术，webStorage本地缓存
+4. 新增canvas，video，audio等新标签元素。新增特殊内容元素：article，footer，header，nav，section等，新增表单控件：calendar，date，time，email，url，search。
+5. 地理定位…
+6. 新增webSocket/webWork技术
+
+>HTML5 存储类型有什么区别？
+
+ HTML5 能够本地存储数据，在之前都是使用 cookies 使用的。HTML5 提供了下面两种本地存储方案：
+  - localStorage 用于持久化的本地存储，数据永远不会过期，关闭浏览器也不会丢失。
+  - sessionStorage 同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储
 
 >
 
@@ -635,22 +662,34 @@ console.log(child2.friends); // ["rose", "lily", "tom"]
 
 
 
-# 缓存
-> cookie
+>  缓存
+1. cookie
 
-当在客户端的浏览器上设置Cookie时，它可以持续数天，数月甚至数年。这样可以轻松保存用户首选项和访问信息<br>
-不需要任何服务器资源，并存储在用户的计算机上，因此不会给服务器带来额外的负担。<br>
-确实非常小，它的大小限制为4KB左右,不能储存大数据且不易读取<br>
->localStorage
+- 当在客户端的浏览器上设置Cookie时，它可以持续数天，数月甚至数年。这样可以轻松保存用户首选项和访问信息<br>
+- 不需要任何服务器资源，并存储在用户的计算机上，因此不会给服务器带来额外的负担。<br>
+- 确实非常小，它的大小限制为4KB左右,不能储存大数据且不易读取<br>
+2. localStorage
 
-5M大小 只能存储字符串格式的数据，所以最好在每次存储时把数据转换成json格式， 取出的时候再转换回来 生命周期是永久的， 除非主动删除数据，否则数据永远不会消失<br>
->sessionStorage
+- 5M大小 只能存储字符串格式的数据，所以最好在每次存储时把数据转换成json格式， 取出的时候再转换回来 生命周期是永久的， 除非主动删除数据，否则数据永远不会消失<br>
+3. sessionStorage
 
 但当页面关闭后，sessionStorage 中的数据就会被清空。<br>
->indexdb 
+4. indexdb 
 
-50mb 允许储存大量数据，提供查找接口，支持异步操作，还能建立索引。indexDB缺点是：不支持DO操作；不能跨域。<br>
+- 50mb 允许储存大量数据，提供查找接口，支持异步操作，还能建立索引。indexDB缺点是：不支持DO操作；不能跨域。<br>
 
+
+> 用户打开首页，加载5s才看到了内容，优化方案都可以说说
+
+这么久才看到页面有可能是因为数据资源大，用户网速慢，服务器响应慢
+优化如下：
+
+1. 对css，js和图片等静态资源进行压缩处理，减小文件大小，加快下载速度；
+2. 将页面的非关键资源设置成延迟加载，使页面首页加载时只加载必要的内容，后再加载其他资源；
+3. 不影响页面渲染的资源可以使用异步的方式进行加载；
+4. 将静态资源部署到CDN上，利用cdn的分布式节点加速资源的传输
+5. 利用浏览器缓存机制和服务端缓存机制，减少重复请求
+6. 对前端代码进行优化，减少重复逻辑
 
 
 
@@ -659,10 +698,133 @@ console.log(child2.friends); // ["rose", "lily", "tom"]
 
 ## 算法题
 
-## 计算机网络基础
+### 排序
+>冒泡
 
-一、HTTP<br>
-1.GET和POST的请求的区别<br>
+```js
+function () {
+    for(let i = 0; i < this.length - 1; i += 1) {
+        //通过 this.length 次把第一位放到最后,完成排序
+        //-i是因为最后的位置是会动态改变的，当完成一次后,最后一位会变成倒数第二位 
+        for(let j = 0; j < this.length - 1 - i; j += 1) { 
+            if(this[j] > this[j+1]) { 
+                const temp = this[j];
+                this[j] = this[j+1];
+                this[j+1] = temp;
+            }
+        }
+    }
+}
+```
+>选择
+```js
+ function() { 
+    for(let i = 0; i < this.length - 1; ++i) { 
+        // 假设最小的值是当前的下标
+        let indexMin = i;
+        //遍历剩余长度找到最小下标
+        for(let j = i; j < this.length; ++j) { 
+            if(this[j] < this[indexMin] ) { 
+                indexMin = j;
+            }
+        }
+        if(indexMin !== i) { 
+            //交换当前下标i与最小下标的值，重复this.length次
+            const temp = this[i];
+            this[i] = this[indexMin];
+            this[indexMin] = temp;
+        }
+    }
+};
+```
+>快排
+```js
+function () { 
+    const rec = (arr) => { 
+       // 预防数组是空的或者只有一个元素, 当所有元素都大于等于基准值就会产生空的数组
+       if(arr.length === 1 || arr.length === 0) { return arr; }
+       const left = [];
+       const right = [];
+       //以第一个元素作为基准值   
+       const mid = arr[0];
+       //小于基准值的放左边，大于基准值的放右边
+       for(let i = 1; i < arr.length; ++i) { 
+           if(arr[i] < mid) { 
+               left.push(arr[i]);
+           } else { 
+               right.push(arr[i]);
+           }
+       }
+        //递归调用，最后放回数组    
+       return [...rec(left),mid,...rec(right)];
+    };
+    const res = rec(this);
+    res.forEach((n,i) => { this[i] = n; })
+}
+
+```
+>归并
+```js
+ function () { 
+    const rec = (arr) => {
+        //如果数组长度为1，说明切完了，可以直接返回
+        if (arr.length === 1) { return arr; }
+        //切分数组，把每一项都单独切出来
+        const mid = Math.floor(arr.length / 2);
+        const left = arr.slice(0,mid);
+        const right = arr.slice(mid,arr.length);
+        //有序的左边数组
+        const orderLeft = rec(left);
+        //有序的右边数组
+        const orderRight = rec(right);
+        //定义一个数组来存放顺序数组
+        const res = [];
+        // 把左右两个有序的合并为一个有序的返回
+        while(orderLeft.length || orderRight.length) { 
+            if(orderLeft.length && orderRight.length) { 
+                res.push(orderLeft[0] < orderRight[0] ? orderLeft.shift() : orderRight.shift())
+            } else if (orderLeft.length) { 
+                res.push(orderLeft.shift());
+            } else if (orderRight.length) { 
+                res.push(orderRight.shift());
+            }
+        }
+        return res;
+    };
+    const res = rec(this);
+    //拷贝到数组本身
+    res.forEach((n,i) => { this[i] = n; });
+}
+```
+>插入
+```js
+ function() { 
+    //从第二个数开始往前比
+    for(let i = 1; i<this.length; ++i) { 
+        //先把值保存起来
+        const temp = this[i];
+        let j = i;
+        while(j > 0) { 
+            if(this[j-1] > temp) { 
+                this[j] = this[j-1];
+            } else { 
+                //因为已经是排序过的了，如果比上一位大，那就没必要再跟上上位比较了
+                break;
+            }
+            j -= 1;
+        }
+        //这里的j有可能是第0位，也有可能是到了一半停止了
+        this[j] = temp;
+    }
+};
+```
+
+
+
+## 其他
+### HTTP
+
+1. GET和POST的请求的区别
 
 |区别	|GET|	POST|
 |----|----|----|
@@ -675,7 +837,7 @@ console.log(child2.friends); // ["rose", "lily", "tom"]
 |参数类型|ASCII字符|文件、图片等|
 |幂等性：指一个请求方法执行一次和多次的效果完全相同|
 
-2.POST和PUT的请求的区别
+2. POST和PUT的请求的区别
 
 |区别|POST|PUT|
 |----|---|---|
@@ -688,7 +850,7 @@ console.log(child2.friends); // ["rose", "lily", "tom"]
 第二次请求为真正的POST请求<br>
 
 
-3.常见的HTTP请求头和响应头
+3. 常见的HTTP请求头和响应头
 
 |HTTP Request Header|定义|
 |----|----|
@@ -717,3 +879,228 @@ console.log(child2.friends); // ["rose", "lily", "tom"]
 |application/json|服务器消息主体是序列化后的 JSON 字符串|
 |text/xml|提交 XML 格式的数据|
 
+### 简单请求和非简单请求
+
+简单请求是浏览器向服务器发送的一种特定类型的跨域请求，满足如下条件就不会触发浏览器的预检请求
+
+- 使用以下方法：get,head,post
+- 请求头只包含以下字段：accept,accept-language,content-language,content-type(有限制)
+
+满足这些条件浏览器会将其视为简单请求，直接发送给后端，不会触发预检请求，服务器收到请求后，若允许跨域，则会返回响应
+不满足那些条件就是非简单请求，这些请求会触发浏览器的预检请求，服务器接收到预检请求后，需要返回相应的cors头部信息来确认是否允许跨域
+
+### 强缓存和协商缓存
+强缓存和协商缓存是浏览器在缓存资源时使用的两种不同策略
+强缓存：强缓存是通过设置http响应头的cache-control和expires字段来实现的，当浏览器发送请求时，会先检查缓存中是否存在资源以及是否过期，若没有则直接从缓存中获取资源，不会向服务器发送请求。
+协商缓存：协商缓存是通过http响应头中的etag和last-modified字段来实现的，当浏览器发送请求时，会先向服务器发送一个验证请求，询问资源是否有更新，服务器收到验证请求后，会根据资源的内容来生成一个唯一标识etag和最后修改时间last-modified，若资源没有发生变化，则服务器返回304状态码，告诉浏览器可以继续使用缓存中的资源，若资源发生了变化，则服务器返回新的资源内容和相应的状态码
+强缓存和协商缓存可以结合使用，浏览器在接收到服务器的响应时会根据cache-control和expires字段判断是否使用强缓存，如果强缓存失效，则会发送一个带有if-none-match或if-modified-since字段的请求，进行协商缓存验证。
+
+
+### 前后端通讯
+
+1. http请求
+2. ajax，js异步与服务器进行通信
+3. websocket，允许前端和后端建立持久连接，并进行双向实时通信，比如在线聊天
+4. SSE(Server-Sent Events)，允许服务器向客户端推送实时更新的数据，与websocket不同，sse只能从服务器向客户端发送数据，不能双向通信
+
+## webpack
+
+> 简单说一下 webpack 的构建流程
+> 
+webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程：
+
+1. 初始化参数：  从配置文件和shell 语句中读取与合并参数，得到最终的参数。
+2. 开始编译：  用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行 compiler 对象的 run 方法开始执行编译。
+3. 确定入口： 根据配置中的 entry 找出所有的入口文件。
+4. 编译模块： 从入口文件出发，调用所有配置的 Loader 对模块进行编译，找出该模块依赖的模块，再递归本步骤直到所有依赖文件都经过本步骤的处理。
+5. 完成模块编译： 在经过第 4 步使用 Loader 编译完所有模块之后，得到每个模块被编译后的最终内容以及它们之间的依赖关系。
+6. 输出资源： 根据入口和模块之间的关系，组装成一个个包含多个模块的 chunk，再把每个 chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会。
+7. 输出完成： 在确定输出内容之后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。
+
+>Loader 和 Plugin 的区别
+
+- Loader 本质就是一个函数，在该函数对接收到的内容进行转换，返回转换后的结果。你可以理解为是一个“管道”，在外部接收到的内容通过这个“管道”进行转换，然后再将转换后的结果输出。因为 webpack 只认识 js，所以，你也可以将 Loader 称之为“翻译官”，对其他类型的资源进行转译的预处理工作。
+- Plugin 直译为插件，基于事件流框架 Tapable。Plugin 可以扩展 webpack 的功能，让 webpack 具有更多的灵活性。在 Webpack 运行的生命周期中会广播出许多事件，Plugin可以监听这些事件，在合适的时机通过 webpack 提供的 API 改变输出结果。
+
+干货来了！！！（通过这个 Tapable 框架，你可以更深层的谈一下 webpack 底层 plugin 是如何实现的以及微内核，其实 webpack 就是微内核架构的一个例子，本质上就是一个是很小的功能，它并没有携带任何业务的功能，比如：打包多个页面，在打包页面上做相应的操作，其实它都没有，形象的来说它更像是一个底座，这底座可以插上各个地方增添的功能）
+扩展：<br>
+微内核系统一般分为两部分 ---核心系统和插件系统，这样就提供了很好的灵活性和可扩展性。核心系统是最小可运行的模块，它提供的是通用逻辑（比如 Tapable），而插件系统这些是具体的逻辑（比如HtmlWebpackPlugin插件），再比如系统怎么跑起来，插件之间怎么通信等模块都属于核心系统里面，让系统更加丰富多彩就是插件系统了。插件之间可以相互独立，也可以有依赖。<br>
+核心系统怎么知道哪些插件可用呢？<br>
+这就需要注册表了，其实我们的 webpack.config.js 就起到了这样的作用，它告诉我们需要使用哪些插件。<br>
+插件系统和核心系统怎么通信呢？<br>
+这就需要用到 Tapable 了，里面有各种 hooks，并且在运行各个生命周期过程中会执行对应的回调。我们的核心系统有生命周期的概念，插件里面也有，因为它们的架构是类似的。我们的核心系统在运行后会先读取注册表信息，这个过程其实就是订阅事件，主车回调的过程。插件可以在运行回调的过程中再不断订阅自己需要的其他事件，注册其他回调。服务于具体逻辑的插件模块是独立于核心系统之外的，但是它可能会需要操作核心模块的系统服务来实现这些规定的功能，此时核心系统需要提供一个上下文对象（context），当然，插件模块与外部进行交互只允许通过此上下文对象完成。上下文对象提供了基础操作（调起其他插件模块、调起系统服务，获取系统信息）的 API 和事件。
+这样待核心系统的生命周期顺序执行的过程，也就伴随这对应的时期的插件的生命周期交替执行，生命周期走完了，整个程序流程也就结束了。
+>说一下 webpack 的热更新原理
+
+webpack 的热更新又称为热替换（Hot Module Replacement），缩写为 HMR，这个机制可以做到不用刷新浏览器而将新变更的模块替换掉旧的模块。
+HMR 的核心就是客户端从服务端拉取更新后的文件，准确的说是 chunk diff（chunk需要更新的部分），实际上 webpack-dev-server 与浏览器之间维护了一个 WebSocket，当本地资源发生变化时，webpack-dev-server会向浏览器推送更新，并带上构建时的 hash，让客户端与上一次资源进行对比。客户端对比出差异后会向 webpack-dev-server 发起 ajax 请求来获取更改内容（文件列表、hash），这样客户端就可以再借助这些信息继续向 webpack-dev-server 发起 jsonp 请求获取该 chunk 的增量更新。后续的部分由 HotModulePlugin 来完成，提供了相关的 API 以供开发真针对自身场景进行处理，像 react-hot-loader 和 vue-loader 都是借助这些 API 实现 HMR。
+详细的HRM原理解析
+>如何提高 webpack 的打包速度？
+
+- 多入口情况下，使用 optimization.splitChunks 来提取公共代码。
+- 通过 externals 配置来提取常用库。
+- 利用 DllPlugin 和 DllReferencePlugin 预编译资源模块，通过 DllPlugin 来对那些我们引用但是绝对不会修改的npm包来进行预编译，再通过DllReferencePlugin 将编译编译的模块加载进来。
+- 使用 thread-loader 实现多进程加速编译。
+- 使用 terser-webpack-plugin 对js进行代码压缩。
+- 优化 resolve 配置缩小范围。
+- 使用 tree-shaking 和 Scope hoisting 来剔除多余代码。
+     
+>如何减少 webpack 打包体积？
+
+- 使用 externals 配置来提取常用库。
+- 使用 tree-sjaking 和 scope hoisting 来剔除多余代码。
+- 使用 optimize-css-assets-webpack-plugin 压缩css。
+- 使用 terser-webpack-plugin 对 js 进行代码压缩。
+
+
+> webpack优化方案
+
+Webpack优化方案主要包括以下几个方面：
+
+1. 代码分割：通过配置Webpack的代码分割功能，将项目代码分割成多个块（chunks），并在需要时按需加载。这有助于降低初始加载时间，提高用户体验。
+2. Tree Shaking：利用Webpack的Tree Shaking功能，只保留项目中实际使用到的代码，剔除未使用的代码，从而减小打包后的文件大小。这通常通过ES6模块化导入和导出实现。
+3. 优化加载速度：使用Webpack的插件如MiniCssExtractPlugin来提取CSS代码，以及利用babel-loader的缓存机制等，以减少构建时间和加载时间。
+4. 并行构建：使用Webpack的thread-loader或happypack插件将任务分发给多个子进程并行处理，从而提高构建速度。
+5. 优化文件体积：使用Webpack的压缩插件如terser-webpack-plugin来压缩JavaScript代码，以及使用cssnano等工具压缩CSS代码，进一步减小文件体积。
+6. 减少文件数量：通过按需加载、动态导入等方式减少打包的文件数量，降低初始打包的体积和时间。
+7. 优化Loader和插件：选择性能良好的Loader和插件，并通过配置参数和选项来提高其性能。
+8. 启用缓存：利用Webpack的缓存机制来避免重复构建未改变的模块。可以使用cache-loader或babel-loader的缓存选项来提高构建性能。
+9. 分包处理：通过手动或自动分包的方式，将代码拆分成多个包，实现代码的按需加载，提高加载效率。
+10. 代码压缩：使用gzip等工具对打包后的文件进行压缩，减小传输体积，加快页面加载速度。
+
+
+>webpack 有哪些常见的 loader？你用过哪些 loader？
+
+- cache-loader：可以在一些性能开销较大的 Loader 之前添加，目的是将结果缓存到磁盘里。
+- file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件（处理图片、字体、图标）。
+- url-loader：与file-loader 类似，区别是用户可以设置一个阈值，大于阈值会交给 file-loader，小于阈值时返回文件 base64 形式编码（处理图片）。
+- image-loader：加载并且压缩图片文件。
+- babel-loader：把 ES6 转换成 ES5。
+- ts-loader：将 typescript 转换成 JavaScript。
+- svg-inline-loader：将压缩后的SVG内容注入代码中。
+- raw-loader：加载文件原始内容（utf-8）。
+- sass-loader：将 scss/sass 代码转换成 css。
+- css-loader：加载 css，支持模块化、压缩、文件导入等特性。
+- less-loader：将 less 代码转换成 css。
+- style-loader：生成 style 标签，将 js 中的样式资源插入，并添加到 header 中生效。
+- postcss-loader：扩展 css 语法，使用下一代 css，可以配合 autoprefixer 插件自动补齐 css3 前缀。
+- eslint-loader：通过 eslint 检查 JavaScript 代码。
+- tslint-loader：通过tslint 检查 typesc 代码。
+- vue-loader：加载 vue.js 单文件组件。
+- awesome-typescript-loader：将 typescript 转换成 JavaScript，性能优于 ts-loader。
+
+>webpack 有哪些常见的 plugin？你用过哪些 plugin？
+
+- ignore-plugin：忽略部分文件。
+- html-webpack-plugin：简化 html 文件创建。
+- web-webpack-plugin：可以方便地为单页应用输出 html，比 html-webpack-plugin 好用。
+- terser-webpack-plugin：支持压缩ES6。
+- optimize-css-assets-webpack-plugin：压缩css代码。
+- mini-css-extract-plugin：分离样式文件，css 提取为单独文件，支持按需加载。
+- werviceworker-webpack-plugin：为网页应用追加离线缓存功能。
+- clean-webpack-plugin：目录清理。
+- ModuleconcatenationPlugin：开启 Scope Hoisting。
+- webpack-bundle-analyzer：可视化 webpack 输出文件的体积（业务组件、依赖第三方模块）。
+- speed-measure-webpack-plugin：可以看到每个 loader 和 plugin 执行耗时（这个打包耗时、plugin 和 loader 耗时）。
+- HotModuleReplacementPlugin：模块热替换。
+
+>在使用 webpack 开发时，你用过哪些可以提供效率的插件？
+
+- webpack-dashboard：可以更有好的展示相关打包信息。
+- webpack-merge：提取公共配置，减少重复配置代码。
+- speed-measure-webpack-plugin：简称SMP，分析出 webpack 打包过程中 loader 和 plugin的耗时，有助于找到构建过程中的性能瓶颈。
+- HotModuleReplacementPlugin：模块热替换。
+- size-plugin：监控资源体积变化，尽早发现问题。
+
+>source map 是什么？生产环境怎么用？
+
+source map 是将编译、打包、压缩后的代码映射会源代码的过程。打包压缩后的代码不具备良好的可读性，想要调试源码就需要 source map。<br>
+map 文件只要不打开开发者工具，浏览器是不会加载的。<br>
+显示环境一般有三种处理方案：
+
+- hidden-source-map：借助第三方错误监控平台 Sentry 使用。
+- nosource-source-map：只会显示具体行数以及查看源代码的错误栈。安全性比 source-map 高
+- source-map：通过 nginx 设置将.map文件指对白名单开发。
+注意：在生产环境中避免使用 inline- 和 eval-，因为它们会增加 bundle 体积大小，并降低整体性能。
+
+>文件指纹是什么？
+
+文件指纹是指打包后输出文件的名的后缀。
+
+- hash：和整个项目的构建相关，只要项目文件有修改，整个项目构建的 hash 就会变化。
+- chunkhash：和webpack打包的 chunk 有关，不同的 chunk、不同的 entry 会生成不同的 chunkhash。
+- contenthash：根据文件内容来定义 hash，文件内容不发生变化，则contenthash就不会变化。
+直接在输出文件名添加对应的 hash值即可。
+
+>tree shaking 原理是什么？
+
+webpack中，tree-shaking 的实现 一是先标记出模块导出值中哪些没有被动用过，二是 Terser 使用删除掉这些没被用到的导出语句。<br>
+标记功能需要配置 optimization.usedExports = true 开启   <br>
+
+标记过程大致可划分为三个步骤：
+
+
+1. Make 阶段：收集模块导出变量并记录到模块依赖关系图 ModuleGraph 变量中。
+2. Seal 阶段：遍历 ModuleGraph 标记模块导出变量有没有被使用
+3. 生成产物时：若变量没有被其他模块使用则删除对应的导出语句。
+
+Webpack 中 Tree Shaking 的实现分为如下步骤：
+
+
+1. 在 FlagDependencyExportsPlugin 插件中根据模块的 dependencies 列表收集模块导出值，并记录到 ModuleGraph 体系的 exportsInfo 中
+2. 在 FlagDependencyUsagePlugin 插件中收集模块的导出值的使用情况，并记录到 exportInfo._usedInRuntime 集合中
+3. 在 HarmonyExportXXXDependency.Template.apply 方法中根据导出值的使用情况生成不同的导出语句
+4. 使用 DCE 工具删除 Dead Code，实现完整的树摇效果
+
+
+
+> 说一下 Babel 原理
+
+大多数JavaScript Parser遵循 estree 规范，Babel 最初基于 acorn 项目(轻量级现代 JavaScript 解析器) Babel大概分为三大部分：
+
+
+1. 解析：将代码转换成 AST
+
+- 词法分析：将代码(字符串)分割为token流，即语法单元成的数组
+- 语法分析：分析token流(上面生成的数组)并生成 AST
+
+2. 转换：访问 AST 的节点进行变换操作生产新的 AST
+
+Taro就是利用 babel 完成的小程序语法转换
+
+
+
+3. 生成：以新的 AST 为基础生成代码
+
+
+
+>有写过 loader 吗？简单描述一下思路
+
+没有。但是我知道其开发的基本思路：因为 loader 支持链式调用，所以开发上需要严格遵循“单一职责”，每个 loader 只负责自己需要负责的事情。loader 拿到的是源文件的内容（content），通过this.getOptions() 拿到传入的参数，可以通过返回值的方式将处理后的内容输出或者通过 this.callback() 同步方式将内容返回出去，也可以调用 this.async() 生成一个异步的函数， callback 来处理传入的内容，再通过调用 cabllback（）将处理后的内容返回出去。开发的过程中尽量使用异步 loader。使用 schema-utils 来检验的我们的参数。然后再利用第三方提供的模块进行 loader 的开发。
+
+> 有写过 plugin 吗？简答描述一下思路
+
+没有。但是我知道其开发的基本思路： webpack 在运行生命周期中会广播出许多事件，PLugin 可以监听这些事件，在特定的阶段写入想要添加的自定义功能。webpack 的 tapable 事件流机制保证了插件的有序性，使得整个系统扩展性良好。
+通过 consturctor 获取传入的配置参数，apply() 方法得到 compiler，compiler 暴露了和 webpack 整个生命周期相关的钩子，通过 conpiler.hooks.thiscompilation 初始 compilation。compilation 暴露了与模块和依赖有关的粒度更小的事件钩子，再使用相关的 hooks 对资源进行添加或者修改。emit 事件发生时，可以读取到最终输出的资源、代码块、模块及其依赖，并进行修改（emit 事件是修改 webpack 输出资源的最后时机）。
+异步的事件需要再插件处理完任务时调用回调函数通知 webpack 进入下一个流程，不然会卡住。
+
+## npm i  干了啥？
+
+初次执行 npm i 命令之后，会进行以下步骤：
+
+1. 检查 package.json 文件是否存在，如果不存在，则创建一个空的 package.json 文件；
+2. 解析 package.json 文件中的 dependencies 和 devDependencies 字段，确定需要安装的依赖项及版本号；
+3. 从 npm 服务器下载目标包和相关依赖，存储到本地的 node_modules 目录中；
+4. 如果依赖项中有其他依赖，npm 会递归下载安装它们；
+5. 安装完成后，npm 会将所有的依赖写入 package.json 文件中。
+6. 在已有的node_modules项目中执行npm i 命令之后，更新项目的node_modules的配置，会进行一下命令：
+
+- 从项目package.lock.json中查看依赖版本的integrity属性，比对是否跟本地版本一致，如果一致，就跳过这个包的安装如果不一致走2
+- 参考package.json中包的版本，然后根据语义化版本更新机制，去下载合适的新版本
+- 更新package.lock.json配置
+- 如果依赖包的版本有更新，我们在新下载到的依赖包的package.json中会看到两个字段
+- from和id，from就标识我们项目文件中配置的包版本，id标识当前下载到的包版本
+- 语义化版本不会跟新到大版本，需要手动更新
+- pm i xxx@2.0.0 或者 npm i xxx@latest 会更新到大版本，同时修改项目package.json中的依赖包版本
+- 项目中新安装到的依赖包版本，默认都会以^开头
+- package.lock.json中会锁定项目依赖包中的依赖包的具体版本
