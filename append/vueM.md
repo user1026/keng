@@ -302,7 +302,123 @@ vue 同样也为表单控件也提供了修饰符，常见的有 .lazy、 .numbe
 - .number：将文本框中所输入的内容转换为number类型
 - .trim：可以自动过滤输入首尾的空格
 
+## vuex
 
+>vuex是什么？怎么使用？哪种功能场景使用它？
+
+Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。简单来说就是：应用遇到多个组件共享状态时，使用vuex。<br>
+场景：
+- 多个组件共享数据或者是跨组件传递数据时，比如：单页应用中，组件之间的状态。音乐播放、登录状态、加入购物车
+
+
+
+>vuex的流程
+
+页面通过mapAction异步提交事件到action。action通过commit把对应参数同步提交到mutation，mutation会修改state中对应的值。最后通过getter把对应值跑出去，在页面的计算属性中，通过，mapGetter来动态获取state中的值
+
+>vuex有哪几种属性？vuex的store有几个属性值？分别讲讲它们的作用是什么？
+
+有五种,分别是State , Getter , Mutation , Action , Module (就是mapAction)
+
+- state => 基本数据(数据源存放地)
+- getters => 从基本数据派生出来的数据
+- mutations => 提交更改数据的方法，同步！
+- actions => 像一个装饰器，包裹mutations，使之可以异步。
+- modules => 模块化Vuex
+
+1. state：vuex的基本数据，用来存储变量
+2. geeter：从基本数据(state)派生的数据，相当于state的计算属性
+3. mutation：提交更新数据的方法，必须是同步的(如果需要异步使用action)。每个mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数，提交载荷作为第二个参数。
+4. action：和mutation的功能大致相同，不同之处在于 ==》1. Action 提交的是 mutation，而不是直接变更状态。 2. Action 可以包含任意异步操作。
+5. modules：模块化vuex，可以让每一个模块拥有自己的state、mutation、action、getters,使得结构非常清晰，方便管理。
+
+
+>页面刷新后vuex的state数据丢失怎么解决？
+
+放在localStorage 或者sessionStorage中 ，或者借用辅助插vuex-persistedstate,vuex-persistedstate的createPersistedState()方法
+
+>使用vuex的优势是什么？
+
+作为全局变量来用；vue是单向数据流，有一个vuex来建一个”全局仓库“，可以减少很多开发时候的”传参地狱“。其实vuex中的所有功能都能够通过其他的方式进行实现，只不过vuex对这些方法进行了整合处理，使用起来更加便捷，同时也便于维护。
+
+
+
+>vue 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 action 中？请求数据是写在组件的methods中还是在vuex的action中？
+
+如果请求的数据是多个组件共享的，为了方便只写一份，就写vuex里面，如果是组件独用的就写在当前组件里面。<br>
+如果请求来的数据不是要被其他组件公用，仅仅在请求的组件内使用，就不需要放入 vuex 的 state 里<br>
+如果被其他地方复用，请将请求放入 action 里，方便复用，并包装成 promise 返回<br>
+
+>怎么监听vuex数据的变化？
+
+先用计算属性、然后再监听
+
+>vuex使用actions时不支持多参数传递怎么办？
+
+放在对象里面
+
+>你觉得vuex有什么缺点？
+
+页面刷新时会使state的数据初始化
+
+>你觉得要是不用vuex的话会带来哪些问题？
+
+组件之间传值麻烦复杂
+- 可维护性会下降，你要修改数据，你得维护 3 个地方
+- 可读性下降，因为一个组件里的数据，你根本就看不出来是从哪里来的
+- 增加耦合，大量的上传派发，会让耦合性大大的增加，本来 Vue 用 Component 就是为了减少耦合，现在这么用，和组件化的初衷相背
+ 
+
+>vuex 原理
+
+ vuex 仅仅是作为 vue 的一个插件而存在，不像 Redux,MobX 等库可以应用于所有框架，vuex 只能使用在 vue 上，很大的程度是因为其高度依赖于 vue 的 computed 依赖检测系统以及其插件系统，vuex 整体思想诞生于 flux,可其的实现方式完完全全的使用了 vue 自身的响应式设计，依赖监听、依赖收集都属于 vue 对对象 Property set get 方法的代理劫持。最后一句话结束 vuex 工作原理，vuex 中的 store 本质就是没有 template 的隐藏着的 vue 组件；
+
+>使用 Vuex 只需执行 Vue.use(Vuex)，并在 Vue 的配置中传入一个 store 对象的示例，store 是如何实现注入的？
+
+        Vue.use(Vuex) 方法执行的是 install 方法，它实现了 Vue 实例对象的 init 方法封装和注入，使传入的 store 对象被设置到 Vue 上下文环境的store中。因此在VueComponent任意地方都能够通过this.store 访问到该 store。
+
+>Vuex 如何区分 state 是外部直接修改，还是通过 mutation 方法修改的？vuex怎么知道state是通过mutation修改还是外部直接修改的？
+
+通过$watch监听mutation的commit函数中_committing是否为true；严格模式下不允许直接修改。<br>
+Vuex 中修改 state 的唯一渠道就是执行 commit('xx', payload) 方法，其底层通过执行 this._withCommit(fn) 设置_committing 标志变量为 true，然后才能修改 state，修改完毕还需要还原_committing 变量。外部修改虽然能够直接修改 state，但是并没有修改_committing 标志位，所以只要 watch 一下 state，state change 时判断是否_committing 值为 true，即可判断修改的合法性。
+ 
+
+>vuex怎样赋值？vuex存储数据的方法有哪些？
+
+使用下面这两种方法存储数据：
+
+- dispatch：异步操作，写法： this.$store.dispatch('actions方法名',值)
+
+- commit：同步操作，写法：this.$store.commit('mutations方法名',值)
+
+>Vuex中如何异步修改状态
+
+actions与mutations作用类似，都是可以对状态进行修改。不同的是actions是异步操作的。
+
+actions是可以调用Mutations里的方法的。
+>Vuex中状态储存在哪里，怎么改变它？
+
+存储在state中，改变Vuex中的状态的唯一途径就是显式地提交 (commit) mutation。
+
+>Vuex中状态是对象时，使用时要注意什么？
+
+对象是引用类型，复制后改变属性还是会影响原始数据，这样会改变state里面的状态，是不允许，所以先用深度克隆复制对象，再修改。
+
+>怎么在组件中批量使用Vuex的state状态？
+
+使用mapState辅助函数, 利用对象展开运算符将state混入computed对象中
+```js
+import {mapState} from 'vuex' 
+export default{ 
+   computed:{ 
+      ...mapState(['price','number']) 
+   } 
+}
+```
+
+>你有使用过vuex的module吗？主要是在什么场景下使用？
+
+把状态全部集中在状态树上，非常难以维护。按模块分成多个module，状态树延伸多个分支，模块的状态内聚，主枝干放全局共享状态
 
 ## vue2与vue3对比
 
