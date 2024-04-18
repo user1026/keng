@@ -1,7 +1,8 @@
 # Vue面试题
 
+## vue2
 
-> 谈一谈对 MVVM 的理解？
+###  谈一谈对 MVVM 的理解？
 
 参考答案：
 MVVM 是 Model-View-ViewModel 的缩写。MVVM 是一种设计思想。<br>
@@ -10,7 +11,7 @@ View 代表 UI 组件，它负责将数据模型转化成 UI 展现出来，View
 在 MVVM 架构下，View 和 Model 之间并没有直接的联系，而是通过 ViewModel 进行交互， Model 和 ViewModel 之间的交互是双向的， 因此 View 数据的变化会同步到 Model 中，而 Model 数据的变化也会立即反应到 View 上。<br>
 对 ViewModel 通过双向数据绑定把 View 层和 Model 层连接了起来，而 View 和 Model 之间的 同步工作完全是自动的，无需人为干涉，因此开发者只需关注业务逻辑，不需要手动操作 DOM，不需要关注数据状态的同步问题，复杂的数据状态维护完全由 MVVM 来统一管理。
 
->vue2 生命周期有几个阶段
+### vue2 生命周期有几个阶段
 
 - beforeCreate：是 new Vue( ) 之后触发的第一个钩子，在当前阶段 data、methods、computed 以及 watch 上的数据和方法都不能被访问。
 - created：在实例创建完成后发生，当前阶段已经完成了数据观测，也就是可以使用数据，更改数据，在这里更改数据不会触发 updated 函数。可以做一些初始数据的获取，在当前阶段无法与 DOM 进行交互，如果非要想，可以通过 vm.$nextTick 来访问 DOM 。
@@ -21,12 +22,12 @@ View 代表 UI 组件，它负责将数据模型转化成 UI 展现出来，View
 - beforeDestroy：发生在实例销毁之前，在当前阶段实例完全可以被使用，我们可以在这时进行善后收尾工作，比如清除计时器。
 - destroyed：发生在实例销毁之后，这个时候只剩下了 DOM 空壳。组件已被拆解，数据绑定被卸除，监听被移出，子实例也统统被销毁。
 
->vue响应式原理是什么？
+### vue响应式原理是什么？
 
 Vue在初始化数据时，会使用Object.defineProperty重新定义data中的所有属性，当页面使用对应属性时，首先会进行依赖收集(收集当前组件的watcher)如果属性发生变化会通知相关依赖进行更新操作(发布订阅)。
 
 
->多组件（父子组件）中生命周期的调用顺序说一下
+### 多组件（父子组件）中生命周期的调用顺序说一下
 
 组件的调用顺序都是先父后子，渲染完成的顺序是先子后父。组件的销毁操作是先父后子，销毁完成的顺序是先子后父。
 
@@ -37,11 +38,11 @@ Vue在初始化数据时，会使用Object.defineProperty重新定义data中的�
 
 
 
->在 Vue2.x 中如何检测数组的变化？
+### 在 Vue2.x 中如何检测数组的变化？
 
 使用了函数劫持的方式，重写了数组的方法，Vue将data中的数组进行了原型链重写，指向了自己定义的数组原型方法。这样当调用数组api时，可以通知依赖更新。如果数组中包含着引用类型，会对数组中的引用类型再次递归遍历进行监控。这样就实现了监测数组变化。
 
->父子组件的传值
+### 父子组件的传值
 
 1. 父->子props，子->父 this.$on、this.$emit
 2. 获取父子组件实例 :$parent、$children
@@ -49,14 +50,14 @@ Vue在初始化数据时，会使用Object.defineProperty重新定义data中的�
 4. Provide、inject 官方不推荐使用，但是写组件库时很常用
 5. vuex
 
->Vue 实现双向数据绑定原理是什么？
+### Vue 实现双向数据绑定原理是什么？
 
 Vue2.x 采用数据劫持结合发布订阅模式（PubSub 模式）的方式，通过 Object.defineProperty 来劫持各个属性的 setter、getter，在数据变动时发布消息给订阅者，触发相应的监听回调。<br>
 当把一个普通 Javascript 对象传给 Vue 实例来作为它的 data 选项时，Vue 将遍历它的属性，用 Object.defineProperty 将它们转为 getter/setter。用户看不到 getter/setter，但是在内部它们让 Vue 追踪依赖，在属性被访问和修改时通知变化。<br>
 Vue 的数据双向绑定整合了 Observer，Compile 和 Watcher 三者，通过 Observer 来监听自己的 model 的数据变化，通过 Compile 来解析编译模板指令，最终利用 Watcher 搭起 Observer 和 Compile 之间的通信桥梁，达到数据变化->视图更新，视图交互变化（例如 input 操作）->数据 model 变更的双向绑定效果。<br>
 Vue3.x 放弃了 Object.defineProperty ，使用 ES6 原生的 Proxy，来解决以前使用 Object.defineProperty 所存在的一些问题。
 
->说一下在 Vue2.x 中如何检测数组的变化？
+### 说一下在 Vue2.x 中如何检测数组的变化？
 
 Vue2.x 中实现检测数组变化的方法，是将数组的常用方法进行了重写。Vue 将 data 中的数组进行了原型链重写，指向了自己定义的数组原型方法。这样当调用数组 api 时，可以通知依赖更新。如果数组中包含着引用类型，会对数组中的引用类型再次递归遍历进行监控。这样就实现了监测数组变化。
 流程:
@@ -75,7 +76,7 @@ Vue2.x 中实现检测数组变化的方法，是将数组的常用方法进行�
 - 利用索引设置数组项的替代方案 this.$set(items, indexOfItem, newValue)
 - 修改数组的长度的替代方案 this.items.splice(indexOfItem, 1, newValue)
 
->diff 算法分别说一下？
+### diff 算法分别说一下？
 
 简单来说，diff 算法有以下过程
 - 同级比较，再比较子节点
@@ -92,7 +93,7 @@ Vue3.x 借鉴了 ivi 算法和 inferno 算法
 在创建 VNode 时就确定其类型，以及在 mount/patch 的过程中采用位运算来判断一个 VNode 的类型，在这个基础之上再配合核心的 Diff 算法，使得性能上较 Vue2.x 有了提升。该算法中还运用了动态规划的思想求解最长递归子序列。
 
 
->说一下 v-if 与 v-show 的区别
+### 说一下 v-if 与 v-show 的区别
 
 共同点：都是动态显示 DOM 元素<br>
 区别点:
@@ -112,7 +113,7 @@ Vue3.x 借鉴了 ivi 算法和 inferno 算法
 - v-if 适合运营条件不大可能改变
 - v-show 适合频繁切换
 
->keep-alive 相关
+### keep-alive 相关
 
 keep-alive 组件是 vue 的内置组件，用于缓存内部组件实例。这样做的目的在于，keep-alive 内部的组件切回时，不用重新创建组件实例，而直接使用缓存中的实例，一方面能够避免创建组件带来的开销，另一方面可以保留组件的状态。<br>
 keep-alive 具有 include 和 exclude 属性，通过它们可以控制哪些组件进入缓存。另外它还提供了 max 属性，通过它可以设置最大缓存数，当缓存的实例超过该数时，vue 会移除最久没有使用的组件缓存。<br>
@@ -120,7 +121,7 @@ keep-alive 具有 include 和 exclude 属性，通过它们可以控制哪些组
 在具体的实现上，keep-alive 在内部维护了一个 key 数组和一个缓存对象<br>
 
 
->nextTick 的作用是什么？他的实现原理是什么？
+### nextTick 的作用是什么？他的实现原理是什么？
 
 作用：vue 更新 DOM 是异步更新的，数据变化，DOM 的更新不会马上完成，nextTick 的回调是在下次 DOM 更新循环结束之后执行的延迟回调。
 <br>
@@ -132,7 +133,7 @@ keep-alive 具有 include 和 exclude 属性，通过它们可以控制哪些组
 - 如果以上都不行则采用 setTimeout 把函数延迟到 DOM 更新之后再使用，原因是宏任务消耗大于微任务，优先使用微任务，最后使用消耗最大的宏任务。
 
 
->Proxy 相比 defineProperty 的优势在哪里
+### Proxy 相比 defineProperty 的优势在哪里
 
 
 Vue3.x 改用 Proxy 替代 Object.defineProperty<br>
@@ -146,7 +147,7 @@ Vue3.x 改用 Proxy 替代 Object.defineProperty<br>
 
 目前，Object.definedProperty 唯一比 Proxy 好的一点就是兼容性，不过 Proxy 新标准也受到浏览器厂商重点持续的性能优化当中。
 
->说一下 watch 与 computed 的区别是什么？以及他们的使用场景分别是什么？
+### 说一下 watch 与 computed 的区别是什么？以及他们的使用场景分别是什么？
 
 区别：
 
@@ -167,15 +168,15 @@ computed 缓存原理：<br>
 conputed本质是一个惰性的观察者；当计算数据存在于 data 或者 props里时会被警告；<br>
 vue 初次运行会对 computed 属性做初始化处理（initComputed），初始化的时候会对每一个 computed 属性用 watcher 包装起来 ，这里面会生成一个 dirty 属性值为 true；然后执行 defineComputed 函数来计算，计算之后会将 dirty 值变为 false，这里会根据 dirty 值来判断是否需要重新计算；如果属性依赖的数据发生变化，computed 的 watcher 会把 dirty 变为 true，这样就会重新计算 computed 属性的值。
 
->Vue 组件的 data 为什么必须是函数
+### Vue 组件的 data 为什么必须是函数
 
 组件中的 data 写成一个函数，数据以函数返回值形式定义。这样每复用一次组件，就会返回一份新的 data，类似于给每个组件实例创建一个私有的数据空间，让各个组件实例维护各自的数据。而单纯的写成对象形式，就使得所有组件实例共用了一份 data，就会造成一个变了全都会变的结果。
 
->Vue 中的 Key 的作用是什么？
+### Vue 中的 Key 的作用是什么？
 
 key 的作用主要是为了高效的更新虚拟 DOM 。另外 vue 中在使用相同标签名元素的过渡切换时，也会使用到 key 属性，其目的也是为了让 vue 可以区分它们，否则 vue 只会替换其内部属性而不会触发过渡效果。
 
->说一下 ref 的作用是什么？
+### 说一下 ref 的作用是什么？
 
 ref 的作用是被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。其特点是：
 
@@ -188,7 +189,7 @@ ref 的作用是被用来给元素或子组件注册引用信息。引用信息�
 - 获取子组件中的 data
 - 调用子组件中的方法
 
->你的接口请求一般放在哪个生命周期中？为什么要这样做？
+### 你的接口请求一般放在哪个生命周期中？为什么要这样做？
 
 接口请求可以放在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。<br>
 但是推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：
@@ -197,7 +198,7 @@ ref 的作用是被用来给元素或子组件注册引用信息。引用信息�
 2. SSR 不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于代码的一致性
 3. created 是在模板渲染成 html 前调用，即通常初始化某些属性值，然后再渲染成视图。如果在 mounted 钩子函数中请求数据可能导致页面闪屏问题
 
->Vue 的路由实现
+### Vue 的路由实现
 
 解释 hash 模式和 history 模式的实现原理
 - 后面 hash 值的变化，不会导致浏览器向服务器发出请求，浏览器不发出请求，就不会刷新页面；通过监听 hashchange 事件可以知道 hash 发生了哪些变化，然后根据 hash 变化来实现更新页面部分内容的操作。
@@ -256,7 +257,7 @@ vueRouter 有哪几种导航守卫？
 11. 触发 DOM 更新。
 12. 用创建好的实例调用 beforeRouteEnter 守卫中传给 next 的回调函数。
 
->说一下你知道的 vue 修饰符都有哪些？
+### 说一下你知道的 vue 修饰符都有哪些？
 在 vue 中修饰符可以分为 3 类：
 
 - 事件修饰符
@@ -304,7 +305,7 @@ vue 同样也为表单控件也提供了修饰符，常见的有 .lazy、 .numbe
 
 ## vuex
 
->vuex是什么？怎么使用？哪种功能场景使用它？
+### vuex是什么？怎么使用？哪种功能场景使用它？
 
 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。简单来说就是：应用遇到多个组件共享状态时，使用vuex。<br>
 场景：
@@ -312,11 +313,11 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用�
 
 
 
->vuex的流程
+### vuex的流程
 
 页面通过mapAction异步提交事件到action。action通过commit把对应参数同步提交到mutation，mutation会修改state中对应的值。最后通过getter把对应值跑出去，在页面的计算属性中，通过，mapGetter来动态获取state中的值
 
->vuex有哪几种属性？vuex的store有几个属性值？分别讲讲它们的作用是什么？
+### vuex有哪几种属性？vuex的store有几个属性值？分别讲讲它们的作用是什么？
 
 有五种,分别是State , Getter , Mutation , Action , Module (就是mapAction)
 
@@ -333,35 +334,35 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用�
 5. modules：模块化vuex，可以让每一个模块拥有自己的state、mutation、action、getters,使得结构非常清晰，方便管理。
 
 
->页面刷新后vuex的state数据丢失怎么解决？
+### 页面刷新后vuex的state数据丢失怎么解决？
 
 放在localStorage 或者sessionStorage中 ，或者借用辅助插vuex-persistedstate,vuex-persistedstate的createPersistedState()方法
 
->使用vuex的优势是什么？
+### 使用vuex的优势是什么？
 
 作为全局变量来用；vue是单向数据流，有一个vuex来建一个”全局仓库“，可以减少很多开发时候的”传参地狱“。其实vuex中的所有功能都能够通过其他的方式进行实现，只不过vuex对这些方法进行了整合处理，使用起来更加便捷，同时也便于维护。
 
 
 
->vue 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 action 中？请求数据是写在组件的methods中还是在vuex的action中？
+### vue 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 action 中？请求数据是写在组件的methods中还是在vuex的action中？
 
 如果请求的数据是多个组件共享的，为了方便只写一份，就写vuex里面，如果是组件独用的就写在当前组件里面。<br>
 如果请求来的数据不是要被其他组件公用，仅仅在请求的组件内使用，就不需要放入 vuex 的 state 里<br>
 如果被其他地方复用，请将请求放入 action 里，方便复用，并包装成 promise 返回<br>
 
->怎么监听vuex数据的变化？
+### 怎么监听vuex数据的变化？
 
 先用计算属性、然后再监听
 
->vuex使用actions时不支持多参数传递怎么办？
+### vuex使用actions时不支持多参数传递怎么办？
 
 放在对象里面
 
->你觉得vuex有什么缺点？
+### 你觉得vuex有什么缺点？
 
 页面刷新时会使state的数据初始化
 
->你觉得要是不用vuex的话会带来哪些问题？
+### 你觉得要是不用vuex的话会带来哪些问题？
 
 组件之间传值麻烦复杂
 - 可维护性会下降，你要修改数据，你得维护 3 个地方
@@ -369,21 +370,21 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用�
 - 增加耦合，大量的上传派发，会让耦合性大大的增加，本来 Vue 用 Component 就是为了减少耦合，现在这么用，和组件化的初衷相背
  
 
->vuex 原理
+### vuex 原理
 
  vuex 仅仅是作为 vue 的一个插件而存在，不像 Redux,MobX 等库可以应用于所有框架，vuex 只能使用在 vue 上，很大的程度是因为其高度依赖于 vue 的 computed 依赖检测系统以及其插件系统，vuex 整体思想诞生于 flux,可其的实现方式完完全全的使用了 vue 自身的响应式设计，依赖监听、依赖收集都属于 vue 对对象 Property set get 方法的代理劫持。最后一句话结束 vuex 工作原理，vuex 中的 store 本质就是没有 template 的隐藏着的 vue 组件；
 
->使用 Vuex 只需执行 Vue.use(Vuex)，并在 Vue 的配置中传入一个 store 对象的示例，store 是如何实现注入的？
+### 使用 Vuex 只需执行 Vue.use(Vuex)，并在 Vue 的配置中传入一个 store 对象的示例，store 是如何实现注入的？
 
         Vue.use(Vuex) 方法执行的是 install 方法，它实现了 Vue 实例对象的 init 方法封装和注入，使传入的 store 对象被设置到 Vue 上下文环境的store中。因此在VueComponent任意地方都能够通过this.store 访问到该 store。
 
->Vuex 如何区分 state 是外部直接修改，还是通过 mutation 方法修改的？vuex怎么知道state是通过mutation修改还是外部直接修改的？
+### Vuex 如何区分 state 是外部直接修改，还是通过 mutation 方法修改的？vuex怎么知道state是通过mutation修改还是外部直接修改的？
 
 通过$watch监听mutation的commit函数中_committing是否为true；严格模式下不允许直接修改。<br>
 Vuex 中修改 state 的唯一渠道就是执行 commit('xx', payload) 方法，其底层通过执行 this._withCommit(fn) 设置_committing 标志变量为 true，然后才能修改 state，修改完毕还需要还原_committing 变量。外部修改虽然能够直接修改 state，但是并没有修改_committing 标志位，所以只要 watch 一下 state，state change 时判断是否_committing 值为 true，即可判断修改的合法性。
  
 
->vuex怎样赋值？vuex存储数据的方法有哪些？
+### vuex怎样赋值？vuex存储数据的方法有哪些？
 
 使用下面这两种方法存储数据：
 
@@ -391,20 +392,20 @@ Vuex 中修改 state 的唯一渠道就是执行 commit('xx', payload) 方法，
 
 - commit：同步操作，写法：this.$store.commit('mutations方法名',值)
 
->Vuex中如何异步修改状态
+### Vuex中如何异步修改状态
 
 actions与mutations作用类似，都是可以对状态进行修改。不同的是actions是异步操作的。
 
 actions是可以调用Mutations里的方法的。
->Vuex中状态储存在哪里，怎么改变它？
+### Vuex中状态储存在哪里，怎么改变它？
 
 存储在state中，改变Vuex中的状态的唯一途径就是显式地提交 (commit) mutation。
 
->Vuex中状态是对象时，使用时要注意什么？
+### Vuex中状态是对象时，使用时要注意什么？
 
 对象是引用类型，复制后改变属性还是会影响原始数据，这样会改变state里面的状态，是不允许，所以先用深度克隆复制对象，再修改。
 
->怎么在组件中批量使用Vuex的state状态？
+### 怎么在组件中批量使用Vuex的state状态？
 
 使用mapState辅助函数, 利用对象展开运算符将state混入computed对象中
 ```js
@@ -416,9 +417,104 @@ export default{
 }
 ```
 
->你有使用过vuex的module吗？主要是在什么场景下使用？
+### 你有使用过vuex的module吗？主要是在什么场景下使用？
 
 把状态全部集中在状态树上，非常难以维护。按模块分成多个module，状态树延伸多个分支，模块的状态内聚，主枝干放全局共享状态
+
+##  vue2性能优化
+
+### 代码层面的优化
+共8个，记住开头字，这样方便记忆：路函缓脚监，循活容
+1. 路由懒加载
+javascript复制代码const Home = () => import(/* webpackChunkName: "Home" */'../components/layout/home.vue')
+
+2. 函数式组件
+函数型组件也被称为无状态组件，无生命周期（意味着钩子函数不能使用），无状态响应（methods中的方法不能响应）。
+在template模板中增加functional即可
+```HTML
+<template functional>    
+   <el-table      :data="props.items"  //2.3.0之前的Vue版本需要通过props接收传的值，之后的版本可省略      height="400"      border      @selection-change="props.handleSelectChange"    >      
+   <slot></slot>    
+   </el-table>
+</template>
+<script>
+   export default {    
+      props:["items","handleSelectChange"]
+      }
+</script>
+```
+优点：无生命周期，渲染快。
+3. 缓存不活动的组件实例（ keep-alive）
+4. 脚本延迟加载
+```HTML
+<script src="" defer></script>
+<script src="" async></script>
+```
+HTML4的defer是“渲染完再执行”，HTML5的async是“下载完就执行”。多个defer脚本，会按照它们在页面出现的顺序加载，而多个async脚本不能保证加载顺序（如果脚本之间有继承关系，则不能使用async，比如vue与vuex）
+5. 监听事件销毁
+Vue组件销毁时（切换路由时），会自动清理它与其他实例的连接，解绑它的全部指令及事件监听。如果使用原生的方式，比如addEventListener，事件总线等方式是不会自动销毁的，我们需要在组件销毁时（beforeDestroy或destroyed生命周期）手动移除这些事件的监听，以免造成内存泄漏。
+6. 循环添加key
+给每个vnode增加一个唯一id，高效的更新VNode。
+7. 活用v-show，减少v-if
+v-if会改变DOM数，v-show通过display:none的方式来控制显示内容，不会改变DOM数
+8. 容易触发重排的元素与“静态”元素分层（使用z-index）
+一个页面是由许多层级组成。在一个页面构建完渲染树后，是经历以下流程才最终呈现在我们面前：
+（1）浏览器会先获取DOM树并依据样式将其分割成多个独立的渲染层
+（2）CPU将每个层绘制进绘图中
+（3）将位图作为纹理上传至GPU（显卡）绘制
+（4）GPU将所有的渲染层缓存（如果下次上传的渲染层没有发生变化，GPU就不需要对其进行重绘）并符合多个渲染层最终形成我们的图像
+由上可知：CPU负责布局，GPU负责绘制。
+进行分层让GPU分担更多的渲染工作，我们通常把这样的措施称为硬件加速
+### 打包层面的优化
+1. 按需引入，减少打包体积
+2. 不生成.map文件
+vue.config.js配置
+```ini
+productionSourceMap: process.env.NODE_ENV === 'production' ? false : true,
+```
+3. 打包移除console.log
+原因：毕竟是一次函数调用，并且被console.log调用的函数，不会被垃圾回收机制回收，可能会导致内存泄漏。
+使用babel-plugin-transform-remove-console
+### 服务层面的优化
+1. 减少HTTP请求数
+例如：使用雪碧图
+css复制代码background: url('./images/css_sprites.png') -116px -10px; //通过调整position来展示图片
+
+雪碧图自动生成网站：www.toptal.com/developers/…
+2. 开启gzip传输压缩
+3. DNS预解析
+X-DNS-Prefetch-Control头控制着浏览器的DNS预读取功能。DNS预读取是一项使浏览器主动去执行域名解析的功能，其范围包括文档的所有链接，无论是图片的，CSS的，还是JavaScript等其他用户能够点击的URL
+4. 使用CDN加速
+使用BootCDN免费的加速服务，网址：www.bootcdn.cn/
+实例：引入echarts<br>
+在index.html中使用cdn引入<br>
+```HTML
+<script src="https://cdn.bootcss.com/echarts/3.7.2/echarts.min.js"></script>
+```
+在vue.config.js配置
+```js
+configureWebpack: {
+    //externals中的key是用于import，value表示在全局中访问到该对象，
+    //就是window.echarts，window可省略，直接通过echart访问，echart.init()
+    externals: {
+      'echarts': 'echarts'
+    }
+}
+```
+5. 使用SSR渲染
+### 图片资源优化
+1. 压缩图片
+在线压缩图片网站：tinypng.com
+2. 不在HTML里缩放图片
+定义的图片多大，就拿多大的图片，不要在200*200的区域，放400*400的图片
+3. img标签增加alt属性
+在图片加载失败时，同alt属性显示文字，加快页面的反应速度
+4. 图片懒加载
+方法一：使用element-UI的图片懒加载
+方法二：当元素滚动到可视区域处，再给图片的src属性赋值，去加载图片
+5. 使用字体图标代替图片
+
+
 
 ## vue2与vue3对比
 
