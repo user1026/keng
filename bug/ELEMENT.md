@@ -118,4 +118,25 @@ import {
   }
 ```
 
+### el-table 多选框反显没有选中问题
+
+
+toggleRowSelection方法传入的参数 必须是 el-table 绑定的数据
+
+
+### el-table  树形展示箭头点不动
+
+1. row-key指定的属性在table的某条数据中不存在或者为0
+
+### el-form重置表单不生效问题
+如果编辑和添加使用的是一个表单，那么就会存在重置表单不生效的问题，解决方法：
+```js
+//编辑时在this.$nextTick中赋值
+this.$nextTick(() => {
+  this.form = {
+  
+  }
+  })
+```
+
 

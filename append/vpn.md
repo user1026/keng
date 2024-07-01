@@ -59,3 +59,8 @@ https://biteb.click/auth/register?code=uyjD
 https://biteb.one/auth/register?code=uyjD
 
 https://biteb.buzzbiteb.bar/auth/register?code=uyjD
+
+
+# 魔戒
+
+https://mojie.app/register?aff=PjWuXJjn
