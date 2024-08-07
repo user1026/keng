@@ -155,7 +155,7 @@ export const getTime=(dateStr = "-", timeStr = ":", bool = 3)=> {
  * @param {number} bool 是否返回日期/时间/日期+时间
  * @returns {string}
  */
-export const changeTime=(TimeStr, dateStr = "-", timeStr = ":", bool = true)=> {
+export const changeTime=(TimeStr, bool=1,dateStr = "-", timeStr = ":")=> {
     let time = new Date(Number(TimeStr));
     let year = time.getFullYear();
     let month = time.getMonth() + 1 < 10 ? "0" + (time.getMonth() + 1) : (time.getMonth() + 1);
@@ -163,9 +163,9 @@ export const changeTime=(TimeStr, dateStr = "-", timeStr = ":", bool = true)=> {
     let hour = time.getHours() < 10 ? "0" + time.getHours() : time.getHours();
     let minutes = time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
     let seconds = time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds();
-    if (bool==1) {
+    if (bool===1) {
          return `${year}${dateStr}${month}${dateStr}${day}`
-    } else if(bool==2) {
+    } else if(bool===2) {
         return `${hour}${timeStr}${minutes}${timeStr}${seconds}`
     }else{
         return `${year}${dateStr}${month}${dateStr}${day} ${hour}${timeStr}${minutes}${timeStr}${seconds}`
