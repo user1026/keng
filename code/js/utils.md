@@ -514,3 +514,27 @@ console.timeEnd()
 
 ```js
 ```
+
+## 获取或估算DPI
+```js
+// diagonalInches为屏幕对角线尺寸，单位英寸
+// 返回屏幕的DPI
+function getDPI(diagonalInches){
+    var w=window.screen.width;
+    var h=window.screen.height;
+    var dpi=Math.floor(Math.sqrt(Math.pow(w,2)+Math.pow(h,2))/diagonalInches);
+    return dpi;
+}
+```
+## 现实长度与像素数的转换
+```js
+//像素长度=分辨率（DPI）*长度（英寸）
+function getPX(length,dpi){
+    return Math.floor(length/2.54)*dpi;
+}
+```
+```js
+function getLength(px,dpi){
+    return Math.floor(px/dpi)*2.54;
+}
+```
