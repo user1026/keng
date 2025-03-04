@@ -538,3 +538,76 @@ function getLength(px,dpi){
     return Math.floor(px/dpi)*2.54;
 }
 ```
+## 打印PDF合并为一个PDF
+```js
+  async allPrint() {
+                    let pdf=await this.allPrintPDF(true);
+                    this.Loading.allPrint = false;
+                    let pdfBlob=new Blob([pdf], {type: 'application/pdf'});
+                    const link = window.URL.createObjectURL(pdfBlob);
+                    const myWindow = window.open(link, "_blank");
+                    myWindow.print();
+            },
+            async allPrintPDF(val=false) {
+                this.Loading.allPrint = true;
+                let fileList = []
+                for (let i = 0; i < this.FYtableData.length; i++) {
+                    let com = `Com${i}`;
+                    if (this.$refs[com]) {
+                        try {
+                            let blob = await this.$refs[com][0].printPDF(false)
+                            fileList.push(new File([blob], "pdf" + i + ".pdf", {
+                                type: 'application/pdf'
+                            }));
+                        } catch (e) {
+                            this.$message.error("批量打印失败，请选择单个打印")
+                            console.log(e)
+                            return;
+                        }
+                    }
+                }
+                if (fileList.length == 0) {
+                    this.$message.error("批量打印失败，请选择单个打印")
+                    return;
+                }
+                const pdfDoc = await pdfLib.PDFDocument.create();
+                for (let i = 0; i < fileList.length; i++) {
+                    //  let  pdfBytes = await new FileReader().readAsArrayBuffer(fileList[i]);
+                    let reader = new FileReader();
+                    let pdfBytes = await new Promise((resolve, reject) => {
+                        reader.onload = () => {
+                            resolve(reader.result)
+                        }
+                        reader.onerror = (e) => {
+                            this.$message.error("加载页面PDF失败，请选择单个打印")
+                            reject(e)
+                        }
+                        reader.readAsArrayBuffer(fileList[i]);
+                    })
+                    try {
+                        let pdf = await pdfLib.PDFDocument.load(pdfBytes);
+                        let pages = await pdfDoc.copyPages(pdf, pdf.getPageIndices());
+                        for (let j = 0; j < pages.length; j++) {
+                            pdfDoc.addPage(pages[j]);
+                        }
+                    } catch (e) {
+                        this.$message.error("生成最终PDF失败，请选择单个打印")
+                    }
+                }
+              
+                if(val){
+                    let pdfFile = await pdfDoc.save();
+                    return pdfFile;
+                }
+                let pdfFile = await pdfDoc.saveAsBase64();
+                let a = document.createElement('a');
+                a.href = "data:application/pdf;base64," + pdfFile;
+                a.download = '凭证.pdf';
+                document.body.appendChild(a);
+                a.click();
+                URL.revokeObjectURL(a
+                .href); //URL.revokeObjectURL() 静态方法用来释放一个之前通过调用 URL.createObjectURL() 创建的已经存在的 URL 对象。当你结束使用某个 URL 对象时，应该通过调用这个方法来让浏览器知道不再需要保持这个文件的引用了。
+                document.body.removeChild(a);
+                this.Loading.allPrint = false;
+            },
+```
