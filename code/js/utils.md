@@ -155,7 +155,7 @@ export const getTime=(dateStr = "-", timeStr = ":", bool = 3)=> {
  * @param {number} bool 是否返回日期/时间/日期+时间
  * @returns {string}
  */
-export const changeTime=(TimeStr, dateStr = "-", timeStr = ":", bool = true)=> {
+export const changeTime=(TimeStr, bool=1,dateStr = "-", timeStr = ":")=> {
     let time = new Date(Number(TimeStr));
     let year = time.getFullYear();
     let month = time.getMonth() + 1 < 10 ? "0" + (time.getMonth() + 1) : (time.getMonth() + 1);
@@ -163,9 +163,9 @@ export const changeTime=(TimeStr, dateStr = "-", timeStr = ":", bool = true)=> {
     let hour = time.getHours() < 10 ? "0" + time.getHours() : time.getHours();
     let minutes = time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
     let seconds = time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds();
-    if (bool==1) {
+    if (bool===1) {
          return `${year}${dateStr}${month}${dateStr}${day}`
-    } else if(bool==2) {
+    } else if(bool===2) {
         return `${hour}${timeStr}${minutes}${timeStr}${seconds}`
     }else{
         return `${year}${dateStr}${month}${dateStr}${day} ${hour}${timeStr}${minutes}${timeStr}${seconds}`
@@ -513,4 +513,101 @@ console.timeEnd()
 ## node起一个简单服务器
 
 ```js
+```
+
+## 获取或估算DPI
+```js
+// diagonalInches为屏幕对角线尺寸，单位英寸
+// 返回屏幕的DPI
+function getDPI(diagonalInches){
+    var w=window.screen.width;
+    var h=window.screen.height;
+    var dpi=Math.floor(Math.sqrt(Math.pow(w,2)+Math.pow(h,2))/diagonalInches);
+    return dpi;
+}
+```
+## 现实长度与像素数的转换
+```js
+//像素长度=分辨率（DPI）*长度（英寸）
+function getPX(length,dpi){
+    return Math.floor(length/2.54)*dpi;
+}
+```
+```js
+function getLength(px,dpi){
+    return Math.floor(px/dpi)*2.54;
+}
+```
+## 打印PDF合并为一个PDF
+```js
+  async allPrint() {
+                    let pdf=await this.allPrintPDF(true);
+                    this.Loading.allPrint = false;
+                    let pdfBlob=new Blob([pdf], {type: 'application/pdf'});
+                    const link = window.URL.createObjectURL(pdfBlob);
+                    const myWindow = window.open(link, "_blank");
+                    myWindow.print();
+            },
+            async allPrintPDF(val=false) {
+                this.Loading.allPrint = true;
+                let fileList = []
+                for (let i = 0; i < this.FYtableData.length; i++) {
+                    let com = `Com${i}`;
+                    if (this.$refs[com]) {
+                        try {
+                            let blob = await this.$refs[com][0].printPDF(false)
+                            fileList.push(new File([blob], "pdf" + i + ".pdf", {
+                                type: 'application/pdf'
+                            }));
+                        } catch (e) {
+                            this.$message.error("批量打印失败，请选择单个打印")
+                            console.log(e)
+                            return;
+                        }
+                    }
+                }
+                if (fileList.length == 0) {
+                    this.$message.error("批量打印失败，请选择单个打印")
+                    return;
+                }
+                const pdfDoc = await pdfLib.PDFDocument.create();
+                for (let i = 0; i < fileList.length; i++) {
+                    //  let  pdfBytes = await new FileReader().readAsArrayBuffer(fileList[i]);
+                    let reader = new FileReader();
+                    let pdfBytes = await new Promise((resolve, reject) => {
+                        reader.onload = () => {
+                            resolve(reader.result)
+                        }
+                        reader.onerror = (e) => {
+                            this.$message.error("加载页面PDF失败，请选择单个打印")
+                            reject(e)
+                        }
+                        reader.readAsArrayBuffer(fileList[i]);
+                    })
+                    try {
+                        let pdf = await pdfLib.PDFDocument.load(pdfBytes);
+                        let pages = await pdfDoc.copyPages(pdf, pdf.getPageIndices());
+                        for (let j = 0; j < pages.length; j++) {
+                            pdfDoc.addPage(pages[j]);
+                        }
+                    } catch (e) {
+                        this.$message.error("生成最终PDF失败，请选择单个打印")
+                    }
+                }
+              
+                if(val){
+                    let pdfFile = await pdfDoc.save();
+                    return pdfFile;
+                }
+                let pdfFile = await pdfDoc.saveAsBase64();
+                let a = document.createElement('a');
+                a.href = "data:application/pdf;base64," + pdfFile;
+                a.download = '凭证.pdf';
+                document.body.appendChild(a);
+                a.click();
+                URL.revokeObjectURL(a
+                .href); //URL.revokeObjectURL() 静态方法用来释放一个之前通过调用 URL.createObjectURL() 创建的已经存在的 URL 对象。当你结束使用某个 URL 对象时，应该通过调用这个方法来让浏览器知道不再需要保持这个文件的引用了。
+                document.body.removeChild(a);
+                this.Loading.allPrint = false;
+            },
 ```

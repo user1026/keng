@@ -61,7 +61,7 @@ http {   # 配置使用最频繁的部分，代理、缓存、日志定义等绝
     include /etc/nginx/conf.d/*.conf;   # 加载子配置项
     
     server {
-    	listen       80;       # 配置监听的端口
+    	listen       80;       # 配置监听外部客户https的端口
     	server_name  localhost;    # 配置的域名
     	
     	location / {
