@@ -90,3 +90,43 @@ router.beforeEach((to,from,next)=>{
   })
 export default router;
 ```
+## webpack分包
+```javascript
+// vue.config.js
+module.exports = {
+  configureWebpack: {
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          // 将Vue相关库单独打包
+          vue: {
+            test: /[\\/]node_modules[\\/](vue|vue-router|vuex)[\\/]/,
+            name: 'vue',
+            chunks: 'all'
+          },
+          // 将Element UI等UI库单独打包
+          ui: {
+            test: /[\\/]node_modules[\\/](element-ui|ant-design-vue)[\\/]/,
+            name: 'ui',
+            chunks: 'all'
+          },
+          // 将其他第三方库打包到vendors
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            priority: -10,
+            chunks: 'all'
+          }
+        }
+      }
+    }
+  },
+   css: {
+    extract: {
+      filename: 'css/[name].[contenthash:8].css',
+      chunkFilename: 'css/[name].[contenthash:8].chunk.css'
+    }
+  }
+};
+```
