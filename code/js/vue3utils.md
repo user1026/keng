@@ -97,3 +97,30 @@ export default router
 import router from "./router/index";
 app.use(router);
 ```
+
+## vite手动分包
+```javascript
+// vite.config.js
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // 将Vue相关库单独打包
+          vue: ['vue', 'vue-router', 'vuex'],
+          // 将Element UI等UI库单独打包
+          ui: ['element-plus', 'ant-design-vue'],
+          // 将其他第三方库打包到vendors
+          vendors: ['axios', 'lodash']
+        }
+      }
+    },
+     cssCodeSplit: true, // 启用CSS代码分割（默认值）
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[hash][extname]'
+      }
+    }
+  }
+});
+```
