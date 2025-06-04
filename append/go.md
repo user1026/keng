@@ -19,17 +19,28 @@ go env -w GOPROXY=https://goproxy.cn,direct
 go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/
 ```
 
-## go包
+## go工具库
 
 ### excelize
 
-|函数|参数说明|函数说明|举例|
-|-----------|--------|-------------|---------------|
-|OpenFile(filename)|filename:文件路径|打开指定文件|f, err := excelize.OpenFile("../1.xlsx")|
-|Close()|无参|关闭文件|f.Close()|
-|GetCellValue(sheetname,position)|sheetname:工作表名，position:单元格位置|获取工作表中指定单元格的值|res, _ := f.GetCellValue("a", "A2")|
-|GetRows(sheetname)|sheetname:工作表名|获取指定工作表全部单元格| rows, err := f.GetRows("Sheet1")|
-|Save()|无参|保存文件|err := f.Save()|
-|SaveAs(filename)|filename:文件路径|另存为|err := f.SaveAs("../1.xlsx")|
-|NewSheet(sheetname)|sheetname:工作表名|在当前打开文件里新建工作表|index:=f.NewSheet("b")|
-|DeleteSheet(sheetname)|sheetname:工作表名|删除指定工作表|err:=f.DeleteSheet("b")|
+#### 安装
+
+```
+go get github.com/xuri/excelize/v2@latest
+```
+
+### viper
+
+#### 安装
+
+```
+go get github.com/spf13/viper@latest
+```
+
+
+### gorm
+#### 安装
+
+```
+go get gorm.io/gorm@latest
+```
